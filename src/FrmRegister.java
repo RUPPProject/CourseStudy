@@ -4,8 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 public class FrmRegister extends javax.swing.JPanel {
@@ -28,6 +26,7 @@ public class FrmRegister extends javax.swing.JPanel {
         edScStudentID();
         edScCourseID();
         edShowData();
+        btnCancel.setEnabled(false);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -45,11 +44,12 @@ public class FrmRegister extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         btnDelete = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbRegister = new javax.swing.JTable();
         jLabel14 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setLayout(null);
@@ -107,29 +107,44 @@ public class FrmRegister extends javax.swing.JPanel {
         btnDelete.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-trash-25.png"))); // NOI18N
         btnDelete.setText("Delete");
-        btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnDelete.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
             }
         });
         jPanel5.add(btnDelete);
-        btnDelete.setBounds(10, 50, 100, 32);
+        btnDelete.setBounds(10, 50, 110, 32);
 
         btnSave.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png"))); // NOI18N
         btnSave.setText("Save");
-        btnSave.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnSave.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnSave.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
             }
         });
         jPanel5.add(btnSave);
-        btnSave.setBounds(10, 10, 100, 32);
+        btnSave.setBounds(10, 10, 110, 32);
+
+        btnCancel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-cancel-25.png"))); // NOI18N
+        btnCancel.setText("Cancel");
+        btnCancel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnCancel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnCancel);
+        btnCancel.setBounds(10, 90, 110, 32);
 
         add(jPanel5);
-        jPanel5.setBounds(450, 170, 120, 100);
+        jPanel5.setBounds(450, 120, 130, 130);
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -173,9 +188,14 @@ public class FrmRegister extends javax.swing.JPanel {
         jPanel3.add(jLabel14);
         jLabel14.setBounds(10, 10, 90, 31);
 
-        jTextField10.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jPanel3.add(jTextField10);
-        jTextField10.setBounds(130, 10, 257, 30);
+        txtSearch.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+        jPanel3.add(txtSearch);
+        txtSearch.setBounds(130, 10, 257, 30);
 
         add(jPanel3);
         jPanel3.setBounds(10, 270, 630, 240);
@@ -210,16 +230,50 @@ public class FrmRegister extends javax.swing.JPanel {
             btnSave.setText("Update");
             btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-available-updates-25.png")));
             btnDelete.setEnabled(true);
+            btnCancel.setEnabled(true);
         }
     }//GEN-LAST:event_tbRegisterMouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
        edDelete();
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        btnSave.setText("Save");
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png")));
+        btnDelete.setEnabled(false);
+        btnCancel.setEnabled(false);
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+         try{
+             while(mode.getRowCount()>0)
+                 mode.removeRow(0);
+                 mode=(DefaultTableModel)tbRegister.getModel();
+                 String sql="select * from register where student_id=? or no=?";
+                 ps=con.prepareStatement(sql);
+                 ps.setString(1,txtSearch.getText());
+                 ps.setString(2,txtSearch.getText());
+                 rst=ps.executeQuery();
+                 if(rst.first()){
+                     do{
+                         mode.addRow(new String[]{
+                             rst.getString(1),
+                             rst.getString(2),
+                             rst.getString(3),
+                             rst.getString(4),
+                             rst.getString(5)
+                         });
+                     }while(rst.next());
+                 }
+                 else {edShowData();}
+         }catch(NumberFormatException | SQLException e){JOptionPane.showMessageDialog(null,e);}
+    }//GEN-LAST:event_txtSearchKeyReleased
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cboPayment;
@@ -235,9 +289,9 @@ public class FrmRegister extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField10;
     private javax.swing.JLabel lblno;
     private javax.swing.JTable tbRegister;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
     
    
@@ -317,6 +371,7 @@ public class FrmRegister extends javax.swing.JPanel {
             btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png")));
             edShowData();
             btnDelete.setEnabled(false);
+            btnCancel.setEnabled(false);
         }catch(NumberFormatException | SQLException e){JOptionPane.showMessageDialog(this,e);}
     }
     public void edShowData(){

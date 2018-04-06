@@ -16,6 +16,7 @@ public class FrmPeriod extends javax.swing.JPanel {
         con=DalinConnectSql.getDalinConnection();
         }catch(Exception e){}
         edShowData();
+        btnCancel.setEnabled(false);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -30,14 +31,18 @@ public class FrmPeriod extends javax.swing.JPanel {
         cboTime = new javax.swing.JComboBox<>();
         txtEndDate = new javax.swing.JTextField();
         txtStartDate = new javax.swing.JTextField();
+        lblshow_id = new javax.swing.JLabel();
+        lblshow_endTime = new javax.swing.JLabel();
+        lblshow_starttime = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         btnDelete = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPeroid = new javax.swing.JTable();
-        jTextField10 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
 
         setLayout(null);
@@ -54,51 +59,105 @@ public class FrmPeriod extends javax.swing.JPanel {
 
         txtID.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         txtID.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtIDKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIDKeyTyped(evt);
+            }
+        });
         jPanel2.add(txtID);
         txtID.setBounds(160, 10, 200, 30);
 
         jLabel12.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel12.setText("Time");
         jPanel2.add(jLabel12);
-        jLabel12.setBounds(10, 50, 140, 31);
+        jLabel12.setBounds(10, 60, 140, 31);
 
         jLabel17.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel17.setText("Start Date");
+        jLabel17.setText("Start Time");
         jPanel2.add(jLabel17);
-        jLabel17.setBounds(10, 90, 130, 31);
+        jLabel17.setBounds(10, 100, 130, 31);
 
         jLabel18.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel18.setText("End Date");
+        jLabel18.setText("End Time");
         jPanel2.add(jLabel18);
-        jLabel18.setBounds(10, 130, 130, 31);
+        jLabel18.setBounds(10, 150, 130, 31);
 
         cboTime.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         cboTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Morning", "Evening", "Night" }));
+        cboTime.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cboTimeKeyReleased(evt);
+            }
+        });
         jPanel2.add(cboTime);
-        cboTime.setBounds(160, 50, 200, 30);
+        cboTime.setBounds(160, 60, 200, 30);
 
         txtEndDate.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         txtEndDate.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtEndDate.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtEndDateFocusLost(evt);
+            }
+        });
         txtEndDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEndDateActionPerformed(evt);
             }
         });
+        txtEndDate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEndDateKeyReleased(evt);
+            }
+        });
         jPanel2.add(txtEndDate);
-        txtEndDate.setBounds(160, 140, 200, 30);
+        txtEndDate.setBounds(160, 150, 200, 30);
 
         txtStartDate.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         txtStartDate.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtStartDate.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtStartDateFocusLost(evt);
+            }
+        });
         txtStartDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtStartDateActionPerformed(evt);
             }
         });
+        txtStartDate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtStartDateKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtStartDateKeyTyped(evt);
+            }
+        });
         jPanel2.add(txtStartDate);
-        txtStartDate.setBounds(160, 90, 200, 30);
+        txtStartDate.setBounds(160, 100, 200, 30);
+
+        lblshow_id.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshow_id.setForeground(new java.awt.Color(255, 0, 102));
+        lblshow_id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblshow_id);
+        lblshow_id.setBounds(160, 40, 200, 20);
+
+        lblshow_endTime.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshow_endTime.setForeground(new java.awt.Color(255, 0, 102));
+        lblshow_endTime.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblshow_endTime);
+        lblshow_endTime.setBounds(160, 180, 200, 20);
+
+        lblshow_starttime.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshow_starttime.setForeground(new java.awt.Color(255, 0, 102));
+        lblshow_starttime.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblshow_starttime);
+        lblshow_starttime.setBounds(160, 130, 200, 20);
 
         add(jPanel2);
-        jPanel2.setBounds(10, 60, 380, 200);
+        jPanel2.setBounds(10, 60, 380, 210);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -114,6 +173,7 @@ public class FrmPeriod extends javax.swing.JPanel {
         btnDelete.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-trash-25.png"))); // NOI18N
         btnDelete.setText("Delete");
+        btnDelete.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,11 +181,12 @@ public class FrmPeriod extends javax.swing.JPanel {
             }
         });
         jPanel5.add(btnDelete);
-        btnDelete.setBounds(10, 50, 100, 32);
+        btnDelete.setBounds(10, 50, 110, 32);
 
         btnSave.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png"))); // NOI18N
         btnSave.setText("Save");
+        btnSave.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnSave.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,10 +194,23 @@ public class FrmPeriod extends javax.swing.JPanel {
             }
         });
         jPanel5.add(btnSave);
-        btnSave.setBounds(10, 10, 100, 32);
+        btnSave.setBounds(10, 10, 110, 32);
+
+        btnCancel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-cancel-25.png"))); // NOI18N
+        btnCancel.setText("Cancel");
+        btnCancel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnCancel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnCancel);
+        btnCancel.setBounds(10, 90, 110, 32);
 
         add(jPanel5);
-        jPanel5.setBounds(410, 100, 120, 100);
+        jPanel5.setBounds(400, 110, 130, 130);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -174,14 +248,19 @@ public class FrmPeriod extends javax.swing.JPanel {
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(12, 48, 496, 170);
 
-        jTextField10.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        txtSearch.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
+                txtSearchActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField10);
-        jTextField10.setBounds(170, 10, 200, 30);
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+        jPanel1.add(txtSearch);
+        txtSearch.setBounds(170, 10, 200, 30);
 
         jLabel19.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel19.setText("Search");
@@ -192,13 +271,28 @@ public class FrmPeriod extends javax.swing.JPanel {
         jPanel1.setBounds(10, 270, 520, 230);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_txtSearchActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
          switch(btnSave.getText()){
              case"Save":
+                 if(txtID.getText().equals("")){
+                     lblshow_id.setText("Please input period id!");
+                     txtID.requestFocus();
+                     return;
+                 }
+                 else if(txtStartDate.getText().equals("")){
+                     lblshow_starttime.setText("Please input start time period");
+                     txtStartDate.requestFocus();
+                     return;
+                 }
+                 else if(txtEndDate.getText().equals("")){
+                     lblshow_endTime.setText("Please input endt time period!");
+                     txtEndDate.requestFocus();
+                     return;
+                 }
                  edSave();
                  MainForm.ref.course.edSCPeriodID();
                  edClear();
@@ -215,8 +309,6 @@ public class FrmPeriod extends javax.swing.JPanel {
     private void tbPeroidMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPeroidMouseClicked
         if(evt.getClickCount()==2){
             int index =tbPeroid.getSelectedRow();
-            txtID.setEnabled(false);
-            btnSave.setText("Update");
             txtID.setText(tbPeroid.getValueAt(index,0).toString());
             cboTime.setSelectedItem(tbPeroid.getValueAt(index, 1));
             txtStartDate.setText(tbPeroid.getValueAt(index,2).toString());
@@ -233,15 +325,17 @@ public class FrmPeriod extends javax.swing.JPanel {
 //            } catch (ParseException ex) {
 //               
 //            }
+             btnSave.setText("Update");
+             btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-available-updates-25.png")));
+             btnCancel.setEnabled(true);
+             btnDelete.setEnabled(true);
+              txtID.setEnabled(false);
         }
     }//GEN-LAST:event_tbPeroidMouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         edDelete();
-        btnSave.setText("Save");
-        txtID.setEnabled(true);
-        MainForm.ref.course.edSCPeriodID();
-        edClear();
+        
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void txtEndDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEndDateActionPerformed
@@ -252,8 +346,80 @@ public class FrmPeriod extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStartDateActionPerformed
 
+    private void txtIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyTyped
+        DalinType.typeNumber(evt);
+    }//GEN-LAST:event_txtIDKeyTyped
+
+    private void txtIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyReleased
+        DalinType.enterCbo(cboTime, evt);
+        lblshow_id.setText("");
+    }//GEN-LAST:event_txtIDKeyReleased
+
+    private void txtStartDateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStartDateKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStartDateKeyTyped
+
+    private void txtStartDateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStartDateKeyReleased
+        DalinType.enterJText(txtEndDate, evt);
+        lblshow_starttime.setText("");
+    }//GEN-LAST:event_txtStartDateKeyReleased
+
+    private void txtEndDateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEndDateKeyReleased
+        DalinType.enterJButton(btnSave, evt);
+        lblshow_endTime.setText("");
+    }//GEN-LAST:event_txtEndDateKeyReleased
+
+    private void cboTimeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cboTimeKeyReleased
+      DalinType.enterJText(txtStartDate, evt);
+    }//GEN-LAST:event_cboTimeKeyReleased
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        try{
+            while(mode.getRowCount()>0)
+                mode.removeRow(0);
+                mode=(DefaultTableModel) tbPeroid.getModel();
+                String sql="select * from period where ID=?";
+                ps=con.prepareStatement(sql);
+                ps.setString(1,txtSearch.getText());
+                rst=ps.executeQuery();
+                if(rst.first()){
+                do{
+                    mode.addRow(new String[]{
+                        rst.getString(1),
+                        rst.getString(2),
+                        rst.getString(3),
+                        rst.getString(4)
+                    });
+                }while(rst.next());
+                }
+                else {edShowData();}
+        }catch(SQLException e){
+        JOptionPane.showMessageDialog(this,e);
+        }
+            
+    }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        btnSave.setText("Save");
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png")));
+        btnDelete.setEnabled(false);
+        btnCancel.setEnabled(false);
+        txtID.setEnabled(true);
+        edClear();
+
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void txtStartDateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStartDateFocusLost
+       DalinType.edUperCase(txtStartDate);
+    }//GEN-LAST:event_txtStartDateFocusLost
+
+    private void txtEndDateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEndDateFocusLost
+         DalinType.edUperCase(txtEndDate);
+    }//GEN-LAST:event_txtEndDateFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cboTime;
@@ -267,10 +433,13 @@ public class FrmPeriod extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField10;
+    private javax.swing.JLabel lblshow_endTime;
+    private javax.swing.JLabel lblshow_id;
+    private javax.swing.JLabel lblshow_starttime;
     private javax.swing.JTable tbPeroid;
     private javax.swing.JTextField txtEndDate;
     private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtStartDate;
     // End of variables declaration//GEN-END:variables
     Connection con;
@@ -289,6 +458,7 @@ public class FrmPeriod extends javax.swing.JPanel {
            ps.setString(4,txtEndDate.getText());
            ps.execute();
            edShowData();
+           edClear();
         }catch(NumberFormatException | SQLException e){JOptionPane.showMessageDialog(null,e);}
     }
     private void edUpdate(){
@@ -301,7 +471,13 @@ public class FrmPeriod extends javax.swing.JPanel {
            ps.setString(2,txtStartDate.getText());
            ps.setString(3,txtEndDate.getText());
            ps.execute();
+           btnSave.setText("Save");
+            btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png")));
+            btnDelete.setEnabled(false);
+            txtID.setEnabled(true);
+            btnCancel.setEnabled(false);
            edShowData();
+           edClear();
         }catch(NumberFormatException | SQLException e){JOptionPane.showMessageDialog(null,e);}
     }
     private void edShowData(){
@@ -327,7 +503,14 @@ public class FrmPeriod extends javax.swing.JPanel {
             ps=con.prepareCall("delete from period where ID=?");
             ps.setInt(1,Integer.parseInt(txtID.getText()));
             ps.execute();
+            btnSave.setText("Save");
+            btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png")));
+            txtID.setEnabled(true);
+            btnDelete.setEnabled(false);
+            btnCancel.setEnabled(false);
+            MainForm.ref.course.edSCPeriodID();
             edShowData();
+            edClear();
             
         }catch(NumberFormatException | SQLException e){JOptionPane.showMessageDialog(this,e);}
     }

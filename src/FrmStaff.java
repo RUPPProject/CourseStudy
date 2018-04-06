@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.swing.ImageIcon;
@@ -38,6 +37,11 @@ public class FrmStaff extends javax.swing.JPanel {
         }
         edShowData();
         btnDelete.setEnabled(false);
+        btnCancel.setEnabled(false);
+        txtPlaceofBirth.setWrapStyleWord(true);
+        txtPlaceofBirth.setLineWrap(true);
+        txtID.requestFocus();
+        btnCancel.setEnabled(false);
     }
     @SuppressWarnings("unchecked")
     
@@ -58,6 +62,9 @@ public class FrmStaff extends javax.swing.JPanel {
         cboPosition = new javax.swing.JComboBox<>();
         txtHiredDate = new com.toedter.calendar.JDateChooser();
         chkStopWork = new javax.swing.JCheckBox();
+        lblshow_phone = new javax.swing.JLabel();
+        lblshowSalary = new javax.swing.JLabel();
+        lblshow_hireddate = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
@@ -70,6 +77,10 @@ public class FrmStaff extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtPlaceofBirth = new javax.swing.JTextArea();
         txtDateofBirth = new com.toedter.calendar.JDateChooser();
+        lblshow_id = new javax.swing.JLabel();
+        lblshow_name = new javax.swing.JLabel();
+        lblshow_birthdate = new javax.swing.JLabel();
+        lblshow_Pbirth = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         Img = new javax.swing.JLabel();
         btnBrows = new javax.swing.JButton();
@@ -77,10 +88,12 @@ public class FrmStaff extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tbStaff = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
-        btnDelete = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        lblshow_Img = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -116,6 +129,15 @@ public class FrmStaff extends javax.swing.JPanel {
         jLabel2.setBounds(12, 13, 90, 31);
 
         txtPhone.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtPhone.setText("0");
+        txtPhone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPhoneKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPhoneKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtPhone);
         txtPhone.setBounds(130, 10, 257, 30);
 
@@ -135,6 +157,14 @@ public class FrmStaff extends javax.swing.JPanel {
         jLabel5.setBounds(10, 110, 90, 31);
 
         txtSalary.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtSalary.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSalaryKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSalaryKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtSalary);
         txtSalary.setBounds(130, 110, 257, 30);
 
@@ -145,14 +175,47 @@ public class FrmStaff extends javax.swing.JPanel {
 
         cboPosition.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         cboPosition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrator", "Manager", "Receptionish", "Cleaner", "Security" }));
+        cboPosition.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cboPositionKeyReleased(evt);
+            }
+        });
         jPanel1.add(cboPosition);
         cboPosition.setBounds(130, 60, 260, 30);
 
         txtHiredDate.setDateFormatString("dd-MM-yyyy");
+        txtHiredDate.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtHiredDatePropertyChange(evt);
+            }
+        });
+        txtHiredDate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtHiredDateKeyReleased(evt);
+            }
+        });
         jPanel1.add(txtHiredDate);
         txtHiredDate.setBounds(130, 160, 260, 30);
         jPanel1.add(chkStopWork);
         chkStopWork.setBounds(140, 210, 20, 21);
+
+        lblshow_phone.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshow_phone.setForeground(new java.awt.Color(255, 0, 102));
+        lblshow_phone.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(lblshow_phone);
+        lblshow_phone.setBounds(140, 40, 220, 20);
+
+        lblshowSalary.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshowSalary.setForeground(new java.awt.Color(255, 0, 102));
+        lblshowSalary.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(lblshowSalary);
+        lblshowSalary.setBounds(140, 140, 240, 20);
+
+        lblshow_hireddate.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshow_hireddate.setForeground(new java.awt.Color(255, 0, 102));
+        lblshow_hireddate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(lblshow_hireddate);
+        lblshow_hireddate.setBounds(140, 190, 220, 20);
 
         add(jPanel1);
         jPanel1.setBounds(480, 70, 450, 290);
@@ -168,6 +231,14 @@ public class FrmStaff extends javax.swing.JPanel {
         jLabel7.setBounds(12, 13, 90, 31);
 
         txtID.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtIDKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIDKeyTyped(evt);
+            }
+        });
         jPanel2.add(txtID);
         txtID.setBounds(130, 10, 257, 30);
 
@@ -180,6 +251,14 @@ public class FrmStaff extends javax.swing.JPanel {
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
+            }
+        });
+        txtName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNameKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNameKeyTyped(evt);
             }
         });
         jPanel2.add(txtName);
@@ -202,19 +281,63 @@ public class FrmStaff extends javax.swing.JPanel {
 
         cboGender.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         cboGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
+        cboGender.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cboGenderKeyReleased(evt);
+            }
+        });
         jPanel2.add(cboGender);
         cboGender.setBounds(130, 110, 260, 30);
 
         txtPlaceofBirth.setColumns(20);
         txtPlaceofBirth.setRows(5);
+        txtPlaceofBirth.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPlaceofBirthKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtPlaceofBirth);
 
         jPanel2.add(jScrollPane1);
         jScrollPane1.setBounds(130, 210, 260, 60);
 
         txtDateofBirth.setDateFormatString("dd-MM-yyyy");
+        txtDateofBirth.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtDateofBirthPropertyChange(evt);
+            }
+        });
+        txtDateofBirth.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDateofBirthKeyReleased(evt);
+            }
+        });
         jPanel2.add(txtDateofBirth);
         txtDateofBirth.setBounds(130, 160, 260, 30);
+
+        lblshow_id.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshow_id.setForeground(new java.awt.Color(255, 0, 102));
+        lblshow_id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblshow_id);
+        lblshow_id.setBounds(140, 40, 220, 20);
+
+        lblshow_name.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshow_name.setForeground(new java.awt.Color(255, 0, 102));
+        lblshow_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblshow_name);
+        lblshow_name.setBounds(140, 90, 220, 20);
+
+        lblshow_birthdate.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshow_birthdate.setForeground(new java.awt.Color(255, 0, 102));
+        lblshow_birthdate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblshow_birthdate);
+        lblshow_birthdate.setBounds(140, 190, 220, 20);
+
+        lblshow_Pbirth.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshow_Pbirth.setForeground(new java.awt.Color(255, 0, 102));
+        lblshow_Pbirth.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblshow_Pbirth);
+        lblshow_Pbirth.setBounds(140, 270, 220, 20);
 
         add(jPanel2);
         jPanel2.setBounds(10, 70, 450, 290);
@@ -240,7 +363,7 @@ public class FrmStaff extends javax.swing.JPanel {
         );
 
         add(jPanel3);
-        jPanel3.setBounds(970, 60, 180, 230);
+        jPanel3.setBounds(950, 70, 180, 230);
 
         btnBrows.setText("Brows");
         btnBrows.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +372,7 @@ public class FrmStaff extends javax.swing.JPanel {
             }
         });
         add(btnBrows);
-        btnBrows.setBounds(1040, 290, 61, 23);
+        btnBrows.setBounds(1000, 300, 80, 23);
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -260,11 +383,11 @@ public class FrmStaff extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Name", "Gender", "Birth Date", "Place of Birh", "Phone", "Position", "Salary", "Hired Date", "Stop Work", "Photo"
+                "ID", "Name", "Gender", "Birth Date", "Place of Birh", "Phone", "Position", "Salary", "Hired Date", "Stop Work"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, true, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -288,25 +411,29 @@ public class FrmStaff extends javax.swing.JPanel {
             tbStaff.getColumnModel().getColumn(7).setResizable(false);
             tbStaff.getColumnModel().getColumn(8).setResizable(false);
             tbStaff.getColumnModel().getColumn(9).setResizable(false);
-            tbStaff.getColumnModel().getColumn(10).setResizable(false);
         }
 
         jPanel4.add(jScrollPane3);
         jScrollPane3.setBounds(10, 50, 1210, 241);
 
         jLabel12.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel12.setText("Name");
+        jLabel12.setText("Search");
         jPanel4.add(jLabel12);
         jLabel12.setBounds(10, 10, 90, 31);
 
-        jTextField8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        txtSearch.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                txtSearchActionPerformed(evt);
             }
         });
-        jPanel4.add(jTextField8);
-        jTextField8.setBounds(130, 10, 257, 30);
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+        jPanel4.add(txtSearch);
+        txtSearch.setBounds(130, 10, 257, 30);
 
         add(jPanel4);
         jPanel4.setBounds(10, 380, 1230, 300);
@@ -315,45 +442,110 @@ public class FrmStaff extends javax.swing.JPanel {
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel5.setLayout(null);
 
-        btnDelete.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-trash-25.png"))); // NOI18N
-        btnDelete.setText("Delete");
-        btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
-        jPanel5.add(btnDelete);
-        btnDelete.setBounds(10, 50, 100, 32);
-
         btnSave.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png"))); // NOI18N
         btnSave.setText("Save");
-        btnSave.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnSave.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnSave.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
             }
         });
         jPanel5.add(btnSave);
-        btnSave.setBounds(10, 10, 100, 32);
+        btnSave.setBounds(10, 10, 110, 32);
+
+        btnDelete.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-trash-25.png"))); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnDelete);
+        btnDelete.setBounds(10, 50, 110, 32);
+
+        btnCancel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-cancel-25.png"))); // NOI18N
+        btnCancel.setText("Cancel");
+        btnCancel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnCancel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnCancel);
+        btnCancel.setBounds(10, 90, 110, 32);
 
         add(jPanel5);
-        jPanel5.setBounds(1160, 130, 120, 100);
+        jPanel5.setBounds(1140, 140, 130, 130);
+
+        lblshow_Img.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshow_Img.setForeground(new java.awt.Color(255, 0, 102));
+        lblshow_Img.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        add(lblshow_Img);
+        lblshow_Img.setBounds(940, 330, 220, 20);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNameActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_txtSearchActionPerformed
 
+    @SuppressWarnings("empty-statement")
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         switch(btnSave.getText()){
             case "Save":
+                if(txtID.getText().equals("")){
+                    lblshow_id.setText("Please input staff id!");
+                    txtID.requestFocus();
+                    return;
+                }
+                else if(txtName.getText().equals("")){
+                    lblshow_name.setText("Please input staff name!");
+                    txtName.requestFocus();
+                    return ;
+                }
+                String n=((JTextField)txtDateofBirth.getDateEditor().getUiComponent()).getText();
+                if(n.equals("")){
+                        lblshow_birthdate.setText("Please choose date of birth staff!");
+                        txtDateofBirth.requestFocus();
+                        return;
+                 } 
+                else if(txtPlaceofBirth.getText().equals("")){
+                    lblshow_Pbirth.setText("Please input place of birth staff!");
+                    txtPlaceofBirth.requestFocus();
+                    return;
+                }
+                int tc=txtPhone.getText().length();
+                if(tc<=8){
+                    lblshow_phone.setText("Phone number of staff is incorrect!");
+                    txtPhone.requestFocus();
+                    return;
+                }
+                if(txtSalary.getText().equals("")){
+                    lblshowSalary.setText("Please input salery of staff!");
+                    txtSalary.requestFocus();;
+                    return;
+                }
+                String hd=((JTextField)txtHiredDate.getDateEditor().getUiComponent()).getText();
+                if(hd.equals("")){
+                    lblshow_hireddate.setText("Please choose hired date of staff!");
+                    txtHiredDate.requestFocus();;
+                    return ;
+                }
+                if(Img.getIcon()==null){
+                    lblshow_Img.setText("Please choose staff image!");
+                    btnBrows.requestFocus();
+                    return;
+                }
                  edSave();
                 break;
             case  "Update":
@@ -366,7 +558,10 @@ public class FrmStaff extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSaveActionPerformed
    
     private void btnBrowsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowsActionPerformed
+        lblshow_Img.setText("");
         ImgDalinBros(Img);
+        
+        
     }//GEN-LAST:event_btnBrowsActionPerformed
    
             
@@ -410,6 +605,7 @@ public class FrmStaff extends javax.swing.JPanel {
             btnSave.setText("Update");
             btnDelete.setEnabled(true);
             txtID.setEnabled(false);
+            btnCancel.setEnabled(true);
         }
 
     }//GEN-LAST:event_tbStaffMouseClicked
@@ -420,11 +616,116 @@ public class FrmStaff extends javax.swing.JPanel {
          btnDelete.setEnabled(false);
          txtID.setEnabled(true);
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void txtIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyTyped
+        DalinType.typeNumber(evt);
+    }//GEN-LAST:event_txtIDKeyTyped
+
+    private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
+        DalinType.typeCharacter(evt);
+    }//GEN-LAST:event_txtNameKeyTyped
+
+    private void txtPhoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyTyped
+        DalinType.type10(txtPhone, evt);
+    }//GEN-LAST:event_txtPhoneKeyTyped
+
+    private void txtSalaryKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalaryKeyTyped
+        DalinType.type1Dot(evt, txtSalary);
+    }//GEN-LAST:event_txtSalaryKeyTyped
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+            btnSave.setText("Save"); 
+            btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png")));
+             btnDelete.setEnabled(false);
+             btnCancel.setEnabled(false);
+             txtID.setEnabled(true);
+             edClear();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void txtIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyReleased
+         DalinType.enterJText(txtName, evt);
+         lblshow_id.setText("");
+    }//GEN-LAST:event_txtIDKeyReleased
+
+    private void txtNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyReleased
+         DalinType.enterCbo(cboGender, evt);
+         lblshow_name.setText("");
+    }//GEN-LAST:event_txtNameKeyReleased
+
+    private void txtDateofBirthPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtDateofBirthPropertyChange
+        lblshow_birthdate.setText("");
+    }//GEN-LAST:event_txtDateofBirthPropertyChange
+
+    private void txtPlaceofBirthKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlaceofBirthKeyReleased
+        lblshow_Pbirth.setText("");
+    }//GEN-LAST:event_txtPlaceofBirthKeyReleased
+
+    private void txtPhoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyReleased
+        DalinType.enterCbo(cboPosition, evt);
+        lblshow_phone.setText("");
+    }//GEN-LAST:event_txtPhoneKeyReleased
+
+    private void txtSalaryKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalaryKeyReleased
+        DalinType.enterJDate(txtHiredDate, evt);
+        lblshowSalary.setText("");
+    }//GEN-LAST:event_txtSalaryKeyReleased
+
+    private void txtHiredDatePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtHiredDatePropertyChange
+        lblshow_hireddate.setText("");
+    }//GEN-LAST:event_txtHiredDatePropertyChange
+
+    private void cboGenderKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cboGenderKeyReleased
+          DalinType.enterJDate(txtDateofBirth, evt);
+    }//GEN-LAST:event_cboGenderKeyReleased
+
+    private void txtDateofBirthKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDateofBirthKeyReleased
+         DalinType.enterJTextArea(txtPlaceofBirth, evt);
+    }//GEN-LAST:event_txtDateofBirthKeyReleased
+
+    private void cboPositionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cboPositionKeyReleased
+         DalinType.enterJText(txtSalary, evt);
+    }//GEN-LAST:event_cboPositionKeyReleased
+
+    private void txtHiredDateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHiredDateKeyReleased
+         DalinType.enterJButton(btnBrows, evt);
+    }//GEN-LAST:event_txtHiredDateKeyReleased
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        try{
+            while(mode.getRowCount()>0)
+                mode.removeRow(0);
+                mode=(DefaultTableModel)tbStaff.getModel();
+                String sql="select * from staff where ID=? or Name=?";
+                ps=con.prepareCall(sql);
+                ps.setString(1, txtSearch.getText());
+                ps.setString(2, txtSearch.getText());
+                rst=ps.executeQuery();
+                if(rst.first()){
+                    do{
+                        mode.addRow(new String[]{
+                        rst.getString(1),    
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4),
+                    rst.getString(5),
+                    rst.getString(6),
+                    rst.getString(7),
+                    rst.getString(8),
+                    rst.getString(9),
+                    rst.getString(10)
+                    
+                                });
+                    }while(rst.next());
+                }
+                else {edShowData();}
+        }catch(Exception e){}
+    }//GEN-LAST:event_txtSearchKeyReleased
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Img;
     private javax.swing.JButton btnBrows;
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cboGender;
@@ -451,7 +752,14 @@ public class FrmStaff extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JLabel lblshowSalary;
+    private javax.swing.JLabel lblshow_Img;
+    private javax.swing.JLabel lblshow_Pbirth;
+    private javax.swing.JLabel lblshow_birthdate;
+    private javax.swing.JLabel lblshow_hireddate;
+    private javax.swing.JLabel lblshow_id;
+    private javax.swing.JLabel lblshow_name;
+    private javax.swing.JLabel lblshow_phone;
     private javax.swing.JTable tbStaff;
     private com.toedter.calendar.JDateChooser txtDateofBirth;
     private com.toedter.calendar.JDateChooser txtHiredDate;
@@ -460,6 +768,7 @@ public class FrmStaff extends javax.swing.JPanel {
     private javax.swing.JTextField txtPhone;
     private javax.swing.JTextArea txtPlaceofBirth;
     private javax.swing.JTextField txtSalary;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
    FileInputStream fis;
     int leng;
@@ -602,8 +911,8 @@ public class FrmStaff extends javax.swing.JPanel {
                     rst.getString(7),
                     rst.getString(8),
                     rst.getString(9),
-                    rst.getString(10),
-                    rst.getString(11)
+                    rst.getString(10)
+            
                     });
                 }while(rst.next());
             

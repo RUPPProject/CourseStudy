@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class FrmStudent extends javax.swing.JPanel {
     DalinType dalin=new DalinType();
+    
     DateFormat sdf=new SimpleDateFormat("dd/MM/YYYY");
     public FrmStudent() {
         initComponents();
@@ -37,7 +38,12 @@ public class FrmStudent extends javax.swing.JPanel {
         }catch(Exception e){}
         edShowData();
         txtID.requestFocus();
-        btnDelete.setEnabled(false);    
+        btnDelete.setEnabled(false); 
+        btnCancel.setEnabled(false);
+        txtPlaceofBirth.setWrapStyleWord(true);
+        txtPlaceofBirth.setLineWrap(true);
+        btnCancel.setEnabled(false);
+        txtID.requestFocus();
     }
     @SuppressWarnings("unchecked")
     
@@ -58,6 +64,9 @@ public class FrmStudent extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtGeneration = new javax.swing.JTextField();
+        lblshowstu_p = new javax.swing.JLabel();
+        lblshowP_stu = new javax.swing.JLabel();
+        lblGeneration = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
@@ -70,6 +79,10 @@ public class FrmStudent extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtPlaceofBirth = new javax.swing.JTextArea();
         txtBirthDAte = new com.toedter.calendar.JDateChooser();
+        lblshowid = new javax.swing.JLabel();
+        lblshow_name = new javax.swing.JLabel();
+        lblshow_date = new javax.swing.JLabel();
+        lblshowpl_birth = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         Img = new javax.swing.JLabel();
         btnBros = new javax.swing.JButton();
@@ -77,10 +90,12 @@ public class FrmStudent extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tbStudent = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         btnDelete = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        lblshowImg = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -182,8 +197,31 @@ public class FrmStudent extends javax.swing.JPanel {
         jLabel4.setBounds(10, 210, 120, 31);
 
         txtGeneration.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtGeneration.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtGenerationKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtGenerationKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtGeneration);
         txtGeneration.setBounds(130, 210, 257, 30);
+
+        lblshowstu_p.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lblshowstu_p.setForeground(new java.awt.Color(255, 0, 51));
+        jPanel1.add(lblshowstu_p);
+        lblshowstu_p.setBounds(140, 40, 250, 20);
+
+        lblshowP_stu.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lblshowP_stu.setForeground(new java.awt.Color(255, 0, 51));
+        jPanel1.add(lblshowP_stu);
+        lblshowP_stu.setBounds(140, 90, 240, 20);
+
+        lblGeneration.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lblGeneration.setForeground(new java.awt.Color(255, 0, 51));
+        jPanel1.add(lblGeneration);
+        lblGeneration.setBounds(150, 240, 200, 20);
 
         add(jPanel1);
         jPanel1.setBounds(480, 70, 450, 290);
@@ -270,6 +308,11 @@ public class FrmStudent extends javax.swing.JPanel {
         jScrollPane1.setBounds(130, 210, 260, 60);
 
         txtBirthDAte.setDateFormatString("dd/MM/YYYY");
+        txtBirthDAte.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtBirthDAtePropertyChange(evt);
+            }
+        });
         txtBirthDAte.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBirthDAteKeyReleased(evt);
@@ -277,6 +320,26 @@ public class FrmStudent extends javax.swing.JPanel {
         });
         jPanel2.add(txtBirthDAte);
         txtBirthDAte.setBounds(130, 160, 260, 30);
+
+        lblshowid.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lblshowid.setForeground(new java.awt.Color(255, 0, 51));
+        jPanel2.add(lblshowid);
+        lblshowid.setBounds(160, 40, 200, 20);
+
+        lblshow_name.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lblshow_name.setForeground(new java.awt.Color(255, 0, 51));
+        jPanel2.add(lblshow_name);
+        lblshow_name.setBounds(150, 90, 200, 20);
+
+        lblshow_date.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lblshow_date.setForeground(new java.awt.Color(255, 0, 51));
+        jPanel2.add(lblshow_date);
+        lblshow_date.setBounds(140, 190, 200, 20);
+
+        lblshowpl_birth.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lblshowpl_birth.setForeground(new java.awt.Color(255, 0, 51));
+        jPanel2.add(lblshowpl_birth);
+        lblshowpl_birth.setBounds(150, 270, 200, 20);
 
         add(jPanel2);
         jPanel2.setBounds(10, 70, 450, 290);
@@ -302,7 +365,7 @@ public class FrmStudent extends javax.swing.JPanel {
         );
 
         add(jPanel3);
-        jPanel3.setBounds(970, 60, 180, 230);
+        jPanel3.setBounds(950, 60, 180, 230);
 
         btnBros.setText("Brows");
         btnBros.addActionListener(new java.awt.event.ActionListener() {
@@ -311,7 +374,7 @@ public class FrmStudent extends javax.swing.JPanel {
             }
         });
         add(btnBros);
-        btnBros.setBounds(1040, 290, 61, 23);
+        btnBros.setBounds(1000, 290, 90, 23);
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -322,7 +385,7 @@ public class FrmStudent extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Name", "Gender", "Birth Date", "Place of Birh", "Phone", "Parents Contact", "Department", "Collage", "Photo"
+                "ID", "Name", "Gender", "Birth Date", "Place of Birh", "Phone", "Parents Contact", "Department", "Collage", "Generation"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -333,6 +396,8 @@ public class FrmStudent extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tbStudent.setColumnSelectionAllowed(false);
+        tbStudent.setRowHeight(18);
         tbStudent.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbStudentMouseClicked(evt);
@@ -360,14 +425,19 @@ public class FrmStudent extends javax.swing.JPanel {
         jPanel4.add(jLabel12);
         jLabel12.setBounds(10, 10, 90, 31);
 
-        jTextField8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        txtSearch.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                txtSearchActionPerformed(evt);
             }
         });
-        jPanel4.add(jTextField8);
-        jTextField8.setBounds(130, 10, 257, 30);
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+        jPanel4.add(txtSearch);
+        txtSearch.setBounds(130, 10, 257, 30);
 
         add(jPanel4);
         jPanel4.setBounds(10, 380, 1230, 300);
@@ -379,91 +449,160 @@ public class FrmStudent extends javax.swing.JPanel {
         btnDelete.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-trash-25.png"))); // NOI18N
         btnDelete.setText("Delete");
-        btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnDelete.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
             }
         });
         jPanel5.add(btnDelete);
-        btnDelete.setBounds(10, 50, 100, 32);
+        btnDelete.setBounds(10, 50, 110, 32);
 
         btnSave.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png"))); // NOI18N
         btnSave.setText("Save");
-        btnSave.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnSave.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnSave.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
             }
         });
         jPanel5.add(btnSave);
-        btnSave.setBounds(10, 10, 100, 32);
+        btnSave.setBounds(10, 10, 110, 32);
+
+        btnCancel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-cancel-25.png"))); // NOI18N
+        btnCancel.setText("Cancel");
+        btnCancel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnCancel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnCancel);
+        btnCancel.setBounds(10, 90, 110, 32);
 
         add(jPanel5);
-        jPanel5.setBounds(1160, 130, 120, 100);
+        jPanel5.setBounds(1150, 130, 130, 130);
+
+        lblshowImg.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lblshowImg.setForeground(new java.awt.Color(255, 0, 51));
+        add(lblshowImg);
+        lblshowImg.setBounds(940, 320, 270, 20);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNameActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_txtSearchActionPerformed
 
     private void btnBrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrosActionPerformed
+        lblshowImg.setText("");
         ImgDalinBros(Img);
     }//GEN-LAST:event_btnBrosActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
          switch(btnSave.getText()){
              case"Save":
-                 edSave();
+                 if(txtID.getText().equals("")){
+                     lblshowid.setText("Please input student id!");
+                     txtID.requestFocus();
+                     return;
+                 }
+                 else if(txtName.getText().equals("")){
+                     lblshow_name.setText("Please input student name!");
+                     txtName.requestFocus();
+                     return;
+                 }
+                 String dat=((JTextField)txtBirthDAte.getDateEditor().getUiComponent()).getText();
+                 if(dat.equals("")){
+                     lblshow_date.setText("Please choose student birth date!");
+                     txtBirthDAte.requestFocus();
+                     return ;
+                 }
+                 else if(txtPlaceofBirth.getText().equals("")){
+                     lblshowpl_birth.setText("Please input place of birth student?");
+                     txtPlaceofBirth.requestFocus();
+                     return;
+                 }
+                 int leng=txtPhoneStu.getText().length();
+                 if(leng<9){
+                     lblshowstu_p.setText("your input phone number is not enough!");
+                     txtPhoneStu.requestFocus();
+                     return;
+                 }
+                 
+                 int lengp=txtParentContact.getText().length();
+                 if(lengp<9){
+                     lblshowP_stu.setText("your input phone number is not enough!");
+                     txtParentContact.requestFocus();
+                     return;
+                 }
+                 else if(txtGeneration.getText().equals("")){
+                     lblGeneration.setText("Please input student generation!");
+                     txtGeneration.requestFocus();
+                     return;
+                 }
+                 
+                 if(Img.getIcon()==null){
+                     lblshowImg.setText("Please click button browe for shoose student image!");
+                     btnBros.requestFocus();
+                     return;
+                 }
+                    edSave();
+                    
                  break;
              case"Update":
-                 edUpdate();
-                 txtID.setEnabled(true);
-                 btnDelete.setEnabled(false);
-                 btnSave.setText("Save");
+                 edUpdate();             
                  break;
          }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void txtIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyReleased
-          DalinType.enterJText(txtID, evt);
+          DalinType.enterJText(txtName, evt);
+          lblshowid.setText("");
     }//GEN-LAST:event_txtIDKeyReleased
 
     private void txtNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyReleased
-        DalinType.enterJText(txtName, evt);
+        DalinType.enterCbo(cboGender, evt);
+        lblshow_name.setText("");
     }//GEN-LAST:event_txtNameKeyReleased
 
     private void cboGenderKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cboGenderKeyReleased
-         DalinType.enterCbo(cboGender, evt);
+         DalinType.enterJDate(txtBirthDAte, evt);
     }//GEN-LAST:event_cboGenderKeyReleased
 
     private void txtPlaceofBirthKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlaceofBirthKeyReleased
-           //d.enterJText(txtPlaceofBirth, evt);
+         lblshowpl_birth.setText("");
     }//GEN-LAST:event_txtPlaceofBirthKeyReleased
 
     private void txtBirthDAteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBirthDAteKeyReleased
-          DalinType.enterJDate(txtBirthDAte, evt);
+          DalinType.enterJTextArea(txtPlaceofBirth, evt);
+          lblshow_date.setText("");
     }//GEN-LAST:event_txtBirthDAteKeyReleased
 
     private void txtPhoneStuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneStuKeyReleased
-         DalinType.enterJText(txtPhoneStu, evt);
+         DalinType.enterJText(txtParentContact, evt);
+         lblshowstu_p.setText("");
     }//GEN-LAST:event_txtPhoneStuKeyReleased
 
     private void txtParentContactKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtParentContactKeyReleased
-           DalinType.enterJText(txtParentContact, evt);
+           DalinType.enterCbo(cboDepartment, evt);
+           lblshowP_stu.setText("");
     }//GEN-LAST:event_txtParentContactKeyReleased
 
     private void cboDepartmentKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cboDepartmentKeyReleased
-         DalinType.enterCbo(cboDepartment, evt);
+         DalinType.enterCbo(cboCollege, evt);
     }//GEN-LAST:event_cboDepartmentKeyReleased
 
     private void cboCollegeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cboCollegeKeyReleased
-           
+        MainForm.type.enterJText(txtGeneration, evt);
     }//GEN-LAST:event_cboCollegeKeyReleased
     
     private void txtIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyTyped
@@ -471,11 +610,11 @@ public class FrmStudent extends javax.swing.JPanel {
     }//GEN-LAST:event_txtIDKeyTyped
 
     private void txtPhoneStuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneStuKeyTyped
-       DalinType.typeLimit(txtPhoneStu, evt);
+       DalinType.type10(txtPhoneStu, evt);
     }//GEN-LAST:event_txtPhoneStuKeyTyped
 
     private void txtParentContactKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtParentContactKeyTyped
-       DalinType.typeLimit(txtParentContact, evt);
+       DalinType.type10(txtParentContact, evt);
     }//GEN-LAST:event_txtParentContactKeyTyped
    Date date=new Date();
     private void tbStudentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbStudentMouseClicked
@@ -507,7 +646,10 @@ public class FrmStudent extends javax.swing.JPanel {
             txtGeneration.setText(tbStudent.getValueAt(index,9).toString());
             txtID.setEnabled(false);
             btnSave.setText("Update");
+            btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-available-updates-25.png")));
+            btnCancel.setEnabled(true);
             btnDelete.setEnabled(true);
+            txtID.setEnabled(false);
         }
     }//GEN-LAST:event_tbStudentMouseClicked
 
@@ -517,15 +659,67 @@ public class FrmStudent extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
          edDelete();
-         txtID.setEnabled(true);
-         btnSave.setText("Save");
-         btnDelete.setEnabled(false);
+         
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void txtGenerationKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGenerationKeyTyped
+        DalinType.typeNumber(evt);
+    }//GEN-LAST:event_txtGenerationKeyTyped
+
+    private void txtGenerationKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGenerationKeyReleased
+        MainForm.type.enterJButton(btnBros, evt);
+        lblGeneration.setText("");
+    }//GEN-LAST:event_txtGenerationKeyReleased
+
+    private void txtBirthDAtePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtBirthDAtePropertyChange
+        lblshow_date.setText("");
+    }//GEN-LAST:event_txtBirthDAtePropertyChange
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+            btnSave.setText("Save"); 
+            btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png")));
+             btnDelete.setEnabled(false);
+             btnCancel.setEnabled(false);
+             txtID.setEnabled(true);
+             edClear();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+          try{
+            while(mode.getRowCount()>0)
+                mode.removeRow(0);
+                mode=(DefaultTableModel)tbStudent.getModel();
+                String sql="select * from student where ID=? or Name=?";
+                ps=con.prepareCall(sql);
+                ps.setString(1, txtSearch.getText());
+                ps.setString(2,txtSearch.getText());
+                rst=ps.executeQuery();
+                if(rst.first()){
+                    do{
+                    mode.addRow(new String[]{
+                    rst.getString(1),    
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4),
+                    rst.getString(5),
+                    rst.getString(6),
+                    rst.getString(7),
+                    rst.getString(8),
+                    rst.getString(9),
+                    rst.getString(10)
+                    
+                                });
+                    }while(rst.next());
+                }
+                else {edShowData();}
+        }catch(SQLException e){}
+    }//GEN-LAST:event_txtSearchKeyReleased
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Img;
     private javax.swing.JButton btnBros;
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cboCollege;
@@ -552,7 +746,14 @@ public class FrmStudent extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JLabel lblGeneration;
+    private javax.swing.JLabel lblshowImg;
+    private javax.swing.JLabel lblshowP_stu;
+    private javax.swing.JLabel lblshow_date;
+    private javax.swing.JLabel lblshow_name;
+    private javax.swing.JLabel lblshowid;
+    private javax.swing.JLabel lblshowpl_birth;
+    private javax.swing.JLabel lblshowstu_p;
     private javax.swing.JTable tbStudent;
     private com.toedter.calendar.JDateChooser txtBirthDAte;
     private javax.swing.JTextField txtGeneration;
@@ -561,6 +762,7 @@ public class FrmStudent extends javax.swing.JPanel {
     private javax.swing.JTextField txtParentContact;
     private javax.swing.JTextField txtPhoneStu;
     private javax.swing.JTextArea txtPlaceofBirth;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
     FileInputStream fis;
     int leng;
@@ -633,6 +835,11 @@ public class FrmStudent extends javax.swing.JPanel {
             ps.execute();
             edShowData();
             edClear();
+            btnSave.setText("Save");
+            btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png")));            
+            btnDelete.setEnabled(false);
+            btnCancel.setEnabled(false);
+            txtID.setEnabled(true);
         } catch (FileNotFoundException | NumberFormatException | SQLException ex) {
             JOptionPane.showMessageDialog(this,ex);
         }
@@ -644,6 +851,11 @@ public class FrmStudent extends javax.swing.JPanel {
         ps.execute();
         edShowData();
         edClear();
+        btnSave.setText("Save");
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png")));
+        btnDelete.setEnabled(false);
+        btnCancel.setEnabled(false);
+        txtID.setEnabled(true);
         MainForm.classDetail.edScStaffID();
         MainForm.register.edScStudentID();
         MainForm.assigment.edSCStudentID();
@@ -689,8 +901,8 @@ public class FrmStudent extends javax.swing.JPanel {
                     rst.getString(7),
                     rst.getString(8),
                     rst.getString(9),
-                    rst.getString(10),
-                    rst.getString(11)
+                    rst.getString(10)
+                    
                     });
                 }while(rst.next());
             

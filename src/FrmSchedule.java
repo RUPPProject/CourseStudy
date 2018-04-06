@@ -21,6 +21,7 @@ public class FrmSchedule extends javax.swing.JPanel {
        edScCourseID();
        edScInstructorID();
        btnDelete.setEnabled(false);
+       btnCancel.setEnabled(false);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -38,6 +39,7 @@ public class FrmSchedule extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         btnDelete = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb = new javax.swing.JTable();
@@ -75,6 +77,11 @@ public class FrmSchedule extends javax.swing.JPanel {
         lblno.setBounds(160, 10, 250, 30);
 
         cboInstructorID.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        cboInstructorID.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cboInstructorIDFocusLost(evt);
+            }
+        });
         jPanel2.add(cboInstructorID);
         cboInstructorID.setBounds(160, 50, 260, 30);
 
@@ -101,6 +108,7 @@ public class FrmSchedule extends javax.swing.JPanel {
         btnDelete.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-trash-25.png"))); // NOI18N
         btnDelete.setText("Delete");
+        btnDelete.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,11 +116,12 @@ public class FrmSchedule extends javax.swing.JPanel {
             }
         });
         jPanel5.add(btnDelete);
-        btnDelete.setBounds(10, 50, 100, 32);
+        btnDelete.setBounds(10, 50, 110, 32);
 
         btnSave.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png"))); // NOI18N
         btnSave.setText("Save");
+        btnSave.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnSave.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,10 +129,23 @@ public class FrmSchedule extends javax.swing.JPanel {
             }
         });
         jPanel5.add(btnSave);
-        btnSave.setBounds(10, 10, 100, 32);
+        btnSave.setBounds(10, 10, 110, 32);
+
+        btnCancel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-cancel-25.png"))); // NOI18N
+        btnCancel.setText("Cancel");
+        btnCancel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnCancel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnCancel);
+        btnCancel.setBounds(10, 90, 110, 32);
 
         add(jPanel5);
-        jPanel5.setBounds(440, 130, 120, 100);
+        jPanel5.setBounds(440, 100, 130, 130);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -185,6 +207,10 @@ public class FrmSchedule extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
          switch(btnSave.getText()){
              case"Save":
+                 if(txtclassname.getText().equals("")){
+                     JOptionPane.showMessageDialog(null,"Input Class Name");
+                     return;
+                 }
                  edSave();
                  break;
              case"Update":
@@ -210,8 +236,23 @@ public class FrmSchedule extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tbMouseClicked
 
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        btnSave.setText("Save");
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png")));
+        btnDelete.setEnabled(false);
+        btnCancel.setEnabled(false);
+
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void cboInstructorIDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboInstructorIDFocusLost
+        try{
+            ps=con.prepareCall("select ");
+        }catch(Exception e){JOptionPane.showMessageDialog(this,e);}
+    }//GEN-LAST:event_cboInstructorIDFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cboCourse_id;

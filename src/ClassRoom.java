@@ -22,6 +22,7 @@ public class ClassRoom extends javax.swing.JPanel {
         txtID.requestFocus();
         txtDecription.setWrapStyleWord(true);
         txtDecription.setLineWrap(true);
+        btnCancel.setEnabled(false);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -40,16 +41,20 @@ public class ClassRoom extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDecription = new javax.swing.JTextArea();
-        jLabel17 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        lblshow_id = new javax.swing.JLabel();
+        lblshowClass_name = new javax.swing.JLabel();
+        lblshow_NameBuilding = new javax.swing.JLabel();
+        lblshow_capaty = new javax.swing.JLabel();
+        lblshow_Decription = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         btnDelete = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbClassRoom = new javax.swing.JTable();
         jLabel14 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
 
         setLayout(null);
 
@@ -75,6 +80,9 @@ public class ClassRoom extends javax.swing.JPanel {
         txtID.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtIDKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIDKeyTyped(evt);
             }
         });
         jPanel2.add(txtID);
@@ -120,6 +128,11 @@ public class ClassRoom extends javax.swing.JPanel {
                 txtNameBuildingActionPerformed(evt);
             }
         });
+        txtNameBuilding.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNameBuildingKeyReleased(evt);
+            }
+        });
         jPanel2.add(txtNameBuilding);
         txtNameBuilding.setBounds(160, 110, 257, 30);
 
@@ -134,6 +147,14 @@ public class ClassRoom extends javax.swing.JPanel {
                 txtCapacityActionPerformed(evt);
             }
         });
+        txtCapacity.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCapacityKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCapacityKeyTyped(evt);
+            }
+        });
         jPanel2.add(txtCapacity);
         txtCapacity.setBounds(160, 160, 257, 30);
 
@@ -144,23 +165,48 @@ public class ClassRoom extends javax.swing.JPanel {
 
         txtDecription.setColumns(20);
         txtDecription.setRows(5);
+        txtDecription.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDecriptionKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(txtDecription);
 
         jPanel2.add(jScrollPane2);
         jScrollPane2.setBounds(160, 210, 260, 70);
 
-        jLabel17.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel17.setText("Course ID");
-        jPanel2.add(jLabel17);
-        jLabel17.setBounds(10, 300, 130, 31);
+        lblshow_id.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshow_id.setForeground(new java.awt.Color(255, 0, 102));
+        lblshow_id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblshow_id);
+        lblshow_id.setBounds(170, 40, 220, 20);
 
-        jComboBox1.setEditable(true);
-        jComboBox1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jPanel2.add(jComboBox1);
-        jComboBox1.setBounds(160, 300, 260, 30);
+        lblshowClass_name.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshowClass_name.setForeground(new java.awt.Color(255, 0, 102));
+        lblshowClass_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblshowClass_name);
+        lblshowClass_name.setBounds(170, 90, 220, 20);
+
+        lblshow_NameBuilding.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshow_NameBuilding.setForeground(new java.awt.Color(255, 0, 102));
+        lblshow_NameBuilding.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblshow_NameBuilding);
+        lblshow_NameBuilding.setBounds(170, 140, 220, 20);
+
+        lblshow_capaty.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshow_capaty.setForeground(new java.awt.Color(255, 0, 102));
+        lblshow_capaty.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblshow_capaty);
+        lblshow_capaty.setBounds(180, 190, 220, 20);
+
+        lblshow_Decription.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshow_Decription.setForeground(new java.awt.Color(255, 0, 102));
+        lblshow_Decription.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblshow_Decription);
+        lblshow_Decription.setBounds(180, 280, 220, 20);
 
         add(jPanel2);
-        jPanel2.setBounds(20, 60, 430, 340);
+        jPanel2.setBounds(20, 60, 430, 310);
 
         jPanel5.setBackground(new java.awt.Color(204, 204, 204));
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -176,7 +222,7 @@ public class ClassRoom extends javax.swing.JPanel {
             }
         });
         jPanel5.add(btnDelete);
-        btnDelete.setBounds(10, 50, 100, 32);
+        btnDelete.setBounds(10, 50, 110, 32);
 
         btnSave.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png"))); // NOI18N
@@ -188,10 +234,23 @@ public class ClassRoom extends javax.swing.JPanel {
             }
         });
         jPanel5.add(btnSave);
-        btnSave.setBounds(10, 10, 100, 32);
+        btnSave.setBounds(10, 10, 110, 32);
+
+        btnCancel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-cancel-25.png"))); // NOI18N
+        btnCancel.setText("Cancel");
+        btnCancel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnCancel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnCancel);
+        btnCancel.setBounds(10, 90, 110, 32);
 
         add(jPanel5);
-        jPanel5.setBounds(480, 230, 120, 100);
+        jPanel5.setBounds(480, 230, 130, 130);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -202,11 +261,11 @@ public class ClassRoom extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Name", "Name Building", "Capacity", "Decription", "Course ID"
+                "ID", "Name", "Name Building", "Capacity", "Decription"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -225,7 +284,6 @@ public class ClassRoom extends javax.swing.JPanel {
             tbClassRoom.getColumnModel().getColumn(2).setResizable(false);
             tbClassRoom.getColumnModel().getColumn(3).setResizable(false);
             tbClassRoom.getColumnModel().getColumn(4).setResizable(false);
-            tbClassRoom.getColumnModel().getColumn(5).setResizable(false);
         }
 
         jPanel1.add(jScrollPane1);
@@ -236,17 +294,22 @@ public class ClassRoom extends javax.swing.JPanel {
         jPanel1.add(jLabel14);
         jLabel14.setBounds(20, 10, 90, 31);
 
-        jTextField10.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        txtSearch.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
+                txtSearchActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField10);
-        jTextField10.setBounds(130, 10, 257, 30);
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+        jPanel1.add(txtSearch);
+        txtSearch.setBounds(130, 10, 257, 30);
 
         add(jPanel1);
-        jPanel1.setBounds(20, 410, 630, 240);
+        jPanel1.setBounds(20, 370, 630, 240);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
@@ -257,9 +320,9 @@ public class ClassRoom extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNameBuildingActionPerformed
 
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_txtSearchActionPerformed
 
     private void txtCapacityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCapacityActionPerformed
         // TODO add your handling code here:
@@ -268,25 +331,44 @@ public class ClassRoom extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         switch(btnSave.getText()){
             case"Save":
+                if(txtID.getText().equals("")){
+                    lblshow_id.setText("Please input class id");
+                    txtID.requestFocus();
+                    return;
+                }
+                else if(txtName.getText().equals("")){
+                    lblshowClass_name.setText("Please input class name!");
+                    txtName.requestFocus();
+                    return;
+                }
+                else if(txtNameBuilding.getText().equals("")){
+                    lblshow_NameBuilding.setText("Please input building name!");
+                    txtNameBuilding.requestFocus();
+                    return;
+                }
+                else if(txtCapacity.getText().equals("")){
+                    lblshow_capaty.setText("Please input capacity of class!");
+                    txtCapacity.requestFocus();
+                    return;
+                }
+                else if(txtDecription.getText().equals("")){
+                    lblshow_Decription.setText("Please input room decription!");
+                    txtDecription.requestFocus();
+                    return;
+                }
                 edSave();
-                edClear();
+                
                 break;
             case"Update":
                 edUpdate();
-                btnSave.setText("Save");
-                btnDelete.setEnabled(false);
-                txtID.setEnabled(true);
-                edClear();
+                
                 break;
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         edDelete();
-        btnSave.setText("Save");
-        btnDelete.setEnabled(false);
-        edClear();
-        txtID.setEnabled(true);
+        
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void tbClassRoomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbClassRoomMouseClicked
@@ -298,17 +380,21 @@ public class ClassRoom extends javax.swing.JPanel {
            txtNameBuilding.setText(tbClassRoom.getValueAt(index,2).toString());
            txtCapacity.setText(tbClassRoom.getValueAt(index,3).toString());
            txtDecription.setText(tbClassRoom.getValueAt(index,4).toString());
-           btnSave.setText("Update");
-           btnDelete.setEnabled(true);
+             btnSave.setText("Update");
+             btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-available-updates-25.png")));
+             btnCancel.setEnabled(true);
+             btnDelete.setEnabled(true);
        }
     }//GEN-LAST:event_tbClassRoomMouseClicked
     //DalinType ed=new DalinType();
     private void txtIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyReleased
-        DalinType.enterJText(txtName, evt);
+         DalinType.enterJText(txtName, evt);
+         lblshow_id.setText("");
     }//GEN-LAST:event_txtIDKeyReleased
 
     private void txtNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyReleased
-        DalinType.enterJText(txtNameBuilding, evt);
+         DalinType.enterJText(txtNameBuilding, evt);
+         lblshowClass_name.setText("");
     }//GEN-LAST:event_txtNameKeyReleased
 
     private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
@@ -320,31 +406,91 @@ public class ClassRoom extends javax.swing.JPanel {
          DalinType.edUperCase(txtNameBuilding);
     }//GEN-LAST:event_txtNameBuildingFocusLost
 
+    private void txtIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyTyped
+        DalinType.typeNumber(evt);
+    }//GEN-LAST:event_txtIDKeyTyped
+
+    private void txtNameBuildingKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameBuildingKeyReleased
+        DalinType.enterJText(txtCapacity, evt);
+        lblshow_NameBuilding.setText("");
+    }//GEN-LAST:event_txtNameBuildingKeyReleased
+
+    private void txtCapacityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCapacityKeyReleased
+        DalinType.enterJTextArea(txtDecription, evt);
+        lblshow_capaty.setText("");
+    }//GEN-LAST:event_txtCapacityKeyReleased
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        btnSave.setText("Save");
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png")));
+        btnDelete.setEnabled(false);
+        btnCancel.setEnabled(false);
+        txtID.setEnabled(true);
+        edClear();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void txtDecriptionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDecriptionKeyReleased
+        lblshow_Decription.setText("");
+    }//GEN-LAST:event_txtDecriptionKeyReleased
+
+    private void txtCapacityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCapacityKeyTyped
+        DalinType.typeNumber(evt);
+    }//GEN-LAST:event_txtCapacityKeyTyped
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        try{
+            while(mode.getRowCount()>0)
+                mode.removeRow(0);
+                mode=(DefaultTableModel) tbClassRoom.getModel();
+                String sql="select * from classroom where ID=? or Name=?";
+                ps=con.prepareStatement(sql);
+                ps.setInt(1,Integer.parseInt(txtSearch.getText()));
+                ps.setString(2,txtSearch.getText());
+                rst=ps.executeQuery();
+                if(rst.first()){
+                    do{
+                        mode.addRow(new String[]{
+                        rst.getString(1),
+                        rst.getString(2),
+                        rst.getString(3),
+                        rst.getString(4),
+                        rst.getString(5)
+                        });
+                    }while(rst.next());
+                }
+                else {edShowData();}
+        }catch(SQLException e){}
+    }//GEN-LAST:event_txtSearchKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField10;
+    private javax.swing.JLabel lblshowClass_name;
+    private javax.swing.JLabel lblshow_Decription;
+    private javax.swing.JLabel lblshow_NameBuilding;
+    private javax.swing.JLabel lblshow_capaty;
+    private javax.swing.JLabel lblshow_id;
     private javax.swing.JTable tbClassRoom;
     private javax.swing.JTextField txtCapacity;
     private javax.swing.JTextArea txtDecription;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtNameBuilding;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
     PreparedStatement ps;
     Connection con;
@@ -362,6 +508,7 @@ public class ClassRoom extends javax.swing.JPanel {
            ps.setString(5,txtDecription.getText());
            ps.execute();
            edShowData();
+           edClear();
            MainForm.classDetail.edScClass();
            MainForm.assigment.edSCClassID();
         }catch(NumberFormatException | SQLException e){JOptionPane.showMessageDialog(this,e);}
@@ -374,6 +521,12 @@ public class ClassRoom extends javax.swing.JPanel {
             ps.setInt(1,Integer.parseInt(txtID.getText()));
             ps.execute();
             edShowData();
+            edClear();
+             btnSave.setText("Save");
+             btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png")));
+             btnDelete.setEnabled(false);
+             btnCancel.setEnabled(false);
+             txtID.setEnabled(true);
             MainForm.classDetail.edScClass();
             MainForm.assigment.edSCClassID();
         }catch(NumberFormatException | SQLException e){JOptionPane.showMessageDialog(this,e);}
@@ -407,7 +560,12 @@ public class ClassRoom extends javax.swing.JPanel {
             ps.setInt(5,Integer.parseInt(txtID.getText().trim()));
             ps.execute();
             edShowData();
-            
+            edClear();
+            btnSave.setText("Save");
+            btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png")));            
+            btnDelete.setEnabled(false);
+            btnCancel.setEnabled(false);
+            txtID.setEnabled(true);
         }catch(NumberFormatException | SQLException e){JOptionPane.showMessageDialog(this,e);}
     }
     public void edClear(){

@@ -2,12 +2,18 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 public class DalinType {
     
     public static void typeCharacter(KeyEvent evt){
@@ -24,7 +30,7 @@ public class DalinType {
              evt.consume();
          }
    }
-   public static void typeLimit(JTextField text,KeyEvent evt){
+   public static void type10(JTextField text,KeyEvent evt){
        char ch=evt.getKeyChar();
        if(!(Character.isDigit(ch))){
            Toolkit.getDefaultToolkit().beep();
@@ -52,15 +58,27 @@ public class DalinType {
            date.requestFocus();
        }
    }
+   public static void enterJTextArea(JTextArea area,KeyEvent evt){
+       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+           area.requestFocus();
+       }
+   }
+    public static void enterJButton(JButton b,KeyEvent evt){
+       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+           b.requestFocus();
+       }
+   }
+  
     Connection con;
     ResultSet rst;
     Statement stm;
-    
+    PreparedStatement ps;
+    DefaultTableModel mode=new DefaultTableModel();
    public void autoID(String Data,JLabel l){
        try{
            con=DalinConnectSql.getDalinConnection();
            stm=con.createStatement();
-           rst=stm.executeQuery("select max(right(no,2)) as no from "+Data+"");
+           rst=stm.executeQuery("select max(right(no,10000)) as no from "+Data+"");
            while(rst.next()){
                if(rst.first()==false){
                    l.setText("100001");
@@ -82,5 +100,34 @@ public class DalinType {
    public static void edUperCase(JTextField input){
        String upercase=input.getText().toUpperCase();
        input.setText(upercase);
+   }
+   public static void type1Dot(KeyEvent evt,JTextField jl){
+       if(evt.getKeyChar()==46){
+           if(jl.getText().indexOf(46)!= -1){
+               Toolkit.getDefaultToolkit().beep();
+               evt.consume();
+           }
+       }
+       else if(!(Character.isDigit(evt.getKeyChar())&&evt.getKeyChar()!=8)){
+            Toolkit.getDefaultToolkit().beep();
+            evt.consume();
+        }
+   }
+   public void edSearch(String data,JTextField input,JTable tb){
+       try{
+           while(mode.getRowCount()>0)
+               mode.removeRow(0);
+               mode=(DefaultTableModel)tb.getModel();
+               
+               ps=con.prepareStatement("select * from "+data+" where id=? or name=?");
+               ps.setString(1, input.getText());
+               rst=ps.executeQuery();
+               
+               while(rst.next()){
+                   mode.addRow(new String[]{
+                       
+                   });
+               }
+       }catch(SQLException e){JOptionPane.showMessageDialog(null, e);}
    }
 }

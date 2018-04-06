@@ -1,12 +1,20 @@
 
 import java.awt.Color;
+import java.sql.Connection;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class MainForm extends javax.swing.JFrame {
     public static JLabel userlogin; 
@@ -33,6 +41,9 @@ public class MainForm extends javax.swing.JFrame {
     
     public MainForm() {
         initComponents();
+        try{
+            con=DalinConnectSql.getDalinConnection();
+        }catch(Exception e){}
         date=lblDate;
         login =new FrmLogin();
         btnR = btnRegister;
@@ -63,6 +74,7 @@ public class MainForm extends javax.swing.JFrame {
         setEnableJButton(false);
         userlogin=lblUser;
         infor=btnInfromation;
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -341,6 +353,11 @@ public class MainForm extends javax.swing.JFrame {
         btnReport.setFont(new java.awt.Font("Segoe UI Black", 0, 15)); // NOI18N
         btnReport.setForeground(new java.awt.Color(255, 255, 255));
         btnReport.setText("Report");
+        btnReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportActionPerformed(evt);
+            }
+        });
 
         btnInfromation.setBackground(new java.awt.Color(0, 0, 204));
         btnInfromation.setFont(new java.awt.Font("Segoe UI Black", 0, 15)); // NOI18N
@@ -458,6 +475,24 @@ public class MainForm extends javax.swing.JFrame {
     private void btnInfromationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfromationActionPerformed
          swapFrm(information,btnInfromation);
     }//GEN-LAST:event_btnInfromationActionPerformed
+
+    private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
+
+    if(curbtn.equals(btnAssignment)){
+        JOptionPane.showMessageDialog(null,"btnAssingment");
+    }
+    else if(curbtn.equals(btnInfromation)){
+        JOptionPane.showMessageDialog(null,"btnIfrom");
+    }
+    else if(curbtn.equals(btnCoures)){
+                try{
+            String report="C:\\Users\\Ean Dalin\\Documents\\NetBeansProjects\\CourseStudy\\src\\report\\Testreport.jrxml";
+            JasperReport rp=JasperCompileManager.compileReport(report);
+            JasperPrint print=JasperFillManager.fillReport(rp,null,con);
+            JasperViewer.viewReport(print);
+        }catch(JRException e){JOptionPane.showMessageDialog(this,e);}
+    }
+    }//GEN-LAST:event_btnReportActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -594,4 +629,5 @@ public class MainForm extends javax.swing.JFrame {
         btnSignin.setEnabled(en);
         btnReport.setEnabled(en);
    }
+    Connection con;
 }

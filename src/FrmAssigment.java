@@ -23,6 +23,7 @@ public class FrmAssigment extends javax.swing.JPanel {
          edScInSTID();
          edScCourseID();
          edShowData();
+         btnCancel.setEnabled(false);
          MainForm.type.autoID(sql, lblno);
     }
     @SuppressWarnings("unchecked")
@@ -43,11 +44,12 @@ public class FrmAssigment extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         btnDelete = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbAssingment = new javax.swing.JTable();
         jLabel14 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         setLayout(null);
@@ -115,6 +117,7 @@ public class FrmAssigment extends javax.swing.JPanel {
         btnDelete.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-trash-25.png"))); // NOI18N
         btnDelete.setText("Delete");
+        btnDelete.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,11 +125,12 @@ public class FrmAssigment extends javax.swing.JPanel {
             }
         });
         jPanel5.add(btnDelete);
-        btnDelete.setBounds(10, 50, 100, 32);
+        btnDelete.setBounds(10, 50, 110, 32);
 
         btnSave.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png"))); // NOI18N
         btnSave.setText("Save");
+        btnSave.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnSave.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,10 +138,23 @@ public class FrmAssigment extends javax.swing.JPanel {
             }
         });
         jPanel5.add(btnSave);
-        btnSave.setBounds(10, 10, 100, 32);
+        btnSave.setBounds(10, 10, 110, 32);
+
+        btnCancel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-cancel-25.png"))); // NOI18N
+        btnCancel.setText("Cancel");
+        btnCancel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnCancel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnCancel);
+        btnCancel.setBounds(10, 90, 110, 32);
 
         add(jPanel5);
-        jPanel5.setBounds(450, 210, 120, 100);
+        jPanel5.setBounds(450, 180, 130, 130);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -148,7 +165,7 @@ public class FrmAssigment extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Name", "Name Building", "Capacity", "Decription"
+                "ID", "Class ID", "Student_ID", "Instuctor_ID", "Course_ID"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -165,18 +182,30 @@ public class FrmAssigment extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tbAssingment);
+        if (tbAssingment.getColumnModel().getColumnCount() > 0) {
+            tbAssingment.getColumnModel().getColumn(0).setResizable(false);
+            tbAssingment.getColumnModel().getColumn(1).setResizable(false);
+            tbAssingment.getColumnModel().getColumn(2).setResizable(false);
+            tbAssingment.getColumnModel().getColumn(3).setResizable(false);
+            tbAssingment.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(20, 50, 596, 180);
 
         jLabel14.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel14.setText("Schedule");
+        jLabel14.setText("Search");
         jPanel1.add(jLabel14);
-        jLabel14.setBounds(10, 10, 90, 31);
+        jLabel14.setBounds(20, 10, 90, 31);
 
-        jTextField10.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jPanel1.add(jTextField10);
-        jTextField10.setBounds(130, 10, 257, 30);
+        txtSearch.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+        jPanel1.add(txtSearch);
+        txtSearch.setBounds(130, 10, 257, 30);
 
         add(jPanel1);
         jPanel1.setBounds(10, 320, 630, 240);
@@ -201,26 +230,61 @@ public class FrmAssigment extends javax.swing.JPanel {
               btnSave.setText("Update");
             btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-available-updates-25.png")));
             btnDelete.setEnabled(true);
+            btnCancel.setEnabled(true);
          }
     }//GEN-LAST:event_tbAssingmentMouseClicked
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         switch(btnSave.getText()){
             case"Save":
-                edSave();
-                break;
+            edSave();
+            break;
             case"Update":
-                edUpdate();
-                break;
+            edUpdate();
+            break;
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-         edDelete();
+        edDelete();
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        btnSave.setText("Save");
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png")));
+        btnDelete.setEnabled(false);
+        btnCancel.setEnabled(false);
+       
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+          try{
+            while(mode.getRowCount()>0)
+                mode.removeRow(0);
+                mode=(DefaultTableModel) tbAssingment.getModel();
+                String sql="select * from assignment where no=? or student_id=?";
+                ps=con.prepareStatement(sql);
+                ps.setInt(1,Integer.parseInt(txtSearch.getText()));
+                ps.setInt(2,Integer.parseInt(txtSearch.getText()));
+                rst=ps.executeQuery();
+                if(rst.first()){
+                    do{
+                        mode.addRow(new String[]{
+                        rst.getString(1),
+                        rst.getString(2),
+                        rst.getString(3),
+                        rst.getString(4),
+                        rst.getString(5)
+                        });
+                    }while(rst.next());
+                }
+                else {edShowData();}
+        }catch(SQLException e){}
+    }//GEN-LAST:event_txtSearchKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cboClassID;
@@ -238,9 +302,9 @@ public class FrmAssigment extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField10;
     private javax.swing.JLabel lblno;
     private javax.swing.JTable tbAssingment;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
     Connection con;
     ResultSet rst;

@@ -12,7 +12,6 @@ public class FrmLogin extends javax.swing.JPanel {
         initComponents();
         setSize(432, 313);
         setLocation(600,200);
-        txtID.requestFocus();
         
     }
 
@@ -115,6 +114,11 @@ public class FrmLogin extends javax.swing.JPanel {
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-cancel-25.png"))); // NOI18N
         jButton3.setText("Exit");
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         add(jButton3);
         jButton3.setBounds(80, 230, 100, 32);
     }// </editor-fold>//GEN-END:initComponents
@@ -182,6 +186,14 @@ public class FrmLogin extends javax.swing.JPanel {
     private void txtIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyReleased
          lblShowID1.setText("");
     }//GEN-LAST:event_txtIDKeyReleased
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+         int ask=JOptionPane.showConfirmDialog(null,"Do you want exit?","Exit Form",JOptionPane.YES_NO_OPTION);
+            if(ask==JOptionPane.YES_OPTION){
+                System.exit(0);
+            }
+            else{}
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

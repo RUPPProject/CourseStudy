@@ -13,7 +13,7 @@ public class CreateAccount extends javax.swing.JPanel {
     String sql="createaccount";
     public CreateAccount() {
         initComponents();
-        setSize(667, 657);
+        setSize(646, 704);
         setLocation(400,95);
         try{
             con=DalinConnectSql.getDalinConnection();
@@ -38,10 +38,13 @@ public class CreateAccount extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         cbostaff_id = new javax.swing.JComboBox<>();
         txtEmail = new javax.swing.JTextField();
-        lblRepas = new javax.swing.JLabel();
         txtRepass = new javax.swing.JPasswordField();
         txtPassword = new javax.swing.JPasswordField();
         lblid = new javax.swing.JLabel();
+        lblshow_repass = new javax.swing.JLabel();
+        lblshow_staffname = new javax.swing.JLabel();
+        lblshow_Password = new javax.swing.JLabel();
+        lblshow_emaol = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
@@ -73,7 +76,7 @@ public class CreateAccount extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel9.setText("Password");
         jPanel2.add(jLabel9);
-        jLabel9.setBounds(10, 180, 90, 31);
+        jLabel9.setBounds(10, 200, 90, 31);
 
         jLabel12.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel12.setText("Staff Name");
@@ -83,12 +86,12 @@ public class CreateAccount extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel10.setText("Email");
         jPanel2.add(jLabel10);
-        jLabel10.setBounds(10, 140, 90, 31);
+        jLabel10.setBounds(10, 150, 90, 31);
 
         jLabel13.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel13.setText("Repassword");
         jPanel2.add(jLabel13);
-        jLabel13.setBounds(10, 220, 90, 31);
+        jLabel13.setBounds(10, 250, 90, 31);
 
         cbostaff_id.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         cbostaff_id.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -101,6 +104,11 @@ public class CreateAccount extends javax.swing.JPanel {
                 cbostaff_idActionPerformed(evt);
             }
         });
+        cbostaff_id.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cbostaff_idKeyReleased(evt);
+            }
+        });
         jPanel2.add(cbostaff_id);
         cbostaff_id.setBounds(130, 60, 260, 30);
 
@@ -110,13 +118,13 @@ public class CreateAccount extends javax.swing.JPanel {
                 txtEmailActionPerformed(evt);
             }
         });
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEmailKeyReleased(evt);
+            }
+        });
         jPanel2.add(txtEmail);
-        txtEmail.setBounds(130, 140, 257, 30);
-
-        lblRepas.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        lblRepas.setForeground(new java.awt.Color(255, 0, 51));
-        jPanel2.add(lblRepas);
-        lblRepas.setBounds(160, 250, 180, 20);
+        txtEmail.setBounds(130, 150, 257, 30);
 
         txtRepass.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         txtRepass.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -125,12 +133,15 @@ public class CreateAccount extends javax.swing.JPanel {
             }
         });
         txtRepass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtRepassKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtRepassKeyTyped(evt);
             }
         });
         jPanel2.add(txtRepass);
-        txtRepass.setBounds(130, 220, 260, 30);
+        txtRepass.setBounds(130, 250, 260, 30);
 
         txtPassword.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
@@ -139,19 +150,46 @@ public class CreateAccount extends javax.swing.JPanel {
             }
         });
         txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPasswordKeyTyped(evt);
             }
         });
         jPanel2.add(txtPassword);
-        txtPassword.setBounds(130, 180, 260, 30);
+        txtPassword.setBounds(130, 200, 260, 30);
 
         lblid.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.add(lblid);
         lblid.setBounds(130, 20, 260, 30);
 
+        lblshow_repass.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshow_repass.setForeground(new java.awt.Color(255, 0, 102));
+        lblshow_repass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblshow_repass);
+        lblshow_repass.setBounds(140, 280, 220, 20);
+
+        lblshow_staffname.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshow_staffname.setForeground(new java.awt.Color(255, 0, 102));
+        lblshow_staffname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblshow_staffname);
+        lblshow_staffname.setBounds(140, 130, 220, 20);
+
+        lblshow_Password.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshow_Password.setForeground(new java.awt.Color(255, 0, 102));
+        lblshow_Password.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblshow_Password);
+        lblshow_Password.setBounds(140, 230, 220, 20);
+
+        lblshow_emaol.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lblshow_emaol.setForeground(new java.awt.Color(255, 0, 102));
+        lblshow_emaol.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblshow_emaol);
+        lblshow_emaol.setBounds(140, 180, 220, 20);
+
         add(jPanel2);
-        jPanel2.setBounds(10, 70, 430, 270);
+        jPanel2.setBounds(10, 70, 430, 320);
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 204));
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -213,7 +251,7 @@ public class CreateAccount extends javax.swing.JPanel {
         jScrollPane1.setBounds(10, 60, 610, 240);
 
         add(jPanel3);
-        jPanel3.setBounds(10, 340, 630, 310);
+        jPanel3.setBounds(10, 390, 630, 310);
 
         jPanel5.setBackground(new java.awt.Color(204, 204, 204));
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -292,6 +330,7 @@ public class CreateAccount extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this,pos);
             }
         }catch(HeadlessException | SQLException e){JOptionPane.showMessageDialog(this,e);}
+        lblshow_staffname.setText("");
     }//GEN-LAST:event_cbostaff_idFocusLost
     int index;
     private void tbCreateAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCreateAccountMouseClicked
@@ -311,36 +350,64 @@ public class CreateAccount extends javax.swing.JPanel {
     }//GEN-LAST:event_tbCreateAccountMouseClicked
 
     private void txtRepassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRepassFocusLost
-        pas=txtPassword.getText();
-        repas=txtRepass.getText();
-        if(!pas.equalsIgnoreCase(repas)){
-            lblRepas.setText("your repassword is incorrect!");
-           
-        }
+       
     }//GEN-LAST:event_txtRepassFocusLost
 
     private void txtRepassKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRepassKeyTyped
-        lblRepas.setText("");
+        
     }//GEN-LAST:event_txtRepassKeyTyped
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
-       lblRepas.setText("");
+       
     }//GEN-LAST:event_txtPasswordKeyTyped
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         switch(btnSave.getText()){
             
             case"Save":
-                if(pos.equalsIgnoreCase("Cleaner")||pos.equalsIgnoreCase("Security")){
-                    JOptionPane.showMessageDialog(null,"This position not need use account");
-                }
+                
+                    if(cbostaff_id.getSelectedItem().equals("")){
+                        JOptionPane.showMessageDialog(null,"Choose staff id");
+                        cbostaff_id.requestFocus();
+                    }
+                    if(lblstaff_naemm.getText().equals("")){
+                        lblshow_staffname.setText("Please choose staff id!");
+                        cbostaff_id.requestFocus();
+                        return;
+                    }
+                    else if(txtEmail.getText().equals("")){
+                        lblshow_emaol.setText("Please input your email!");
+                        txtEmail.requestFocus();
+                        return;
+                    }
+                    else if(txtPassword.getText().equals("")){
+                        lblshow_Password.setText("Please input your password!");
+                        txtPassword.requestFocus();
+                        return;
+                    }
+                    if(txtRepass.getText().equals("")){
+                        lblshow_repass.setText("Please input repassword");
+                        txtRepass.requestFocus();
+                        return;
+                    }
+                    if(pos.equalsIgnoreCase("Cleaner")||pos.equalsIgnoreCase("Security")){
+                       JOptionPane.showMessageDialog(null,"This position not need use account");
+                       edClear();
+                    }
                 else{
-                     edSave();
-                   
+                     String pass=txtPassword.getText();
+                     String repass=txtRepass.getText();
+                     if(!pass.equals(repass)){
+                         lblshow_repass.setText("Incorrect password");
+                         txtRepass.requestFocus();
+                     }
+                     else{
+                        edSave();
+                     }
                 }
             break;
             case"Update":
@@ -356,6 +423,27 @@ public class CreateAccount extends javax.swing.JPanel {
         }
         else{}
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
+        DalinType.enterJText(txtPassword, evt);
+        lblshow_emaol.setText("");
+    }//GEN-LAST:event_txtEmailKeyReleased
+
+    private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
+        DalinType.enterJText(txtRepass, evt);
+        lblshow_Password.setText("");
+        lblshow_repass.setText("");
+    }//GEN-LAST:event_txtPasswordKeyReleased
+
+    private void txtRepassKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRepassKeyReleased
+        DalinType.enterJButton(btnSave, evt);
+        lblshow_repass.setText("");
+    }//GEN-LAST:event_txtRepassKeyReleased
+
+    private void cbostaff_idKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbostaff_idKeyReleased
+        DalinType.enterJText(txtEmail, evt);
+        
+    }//GEN-LAST:event_cbostaff_idKeyReleased
     String pas;
     String repas;
 
@@ -376,8 +464,11 @@ public class CreateAccount extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField13;
-    private javax.swing.JLabel lblRepas;
     private javax.swing.JLabel lblid;
+    private javax.swing.JLabel lblshow_Password;
+    private javax.swing.JLabel lblshow_emaol;
+    private javax.swing.JLabel lblshow_repass;
+    private javax.swing.JLabel lblshow_staffname;
     private javax.swing.JLabel lblstaff_naemm;
     private javax.swing.JTable tbCreateAccount;
     private javax.swing.JTextField txtEmail;
@@ -401,7 +492,7 @@ public class CreateAccount extends javax.swing.JPanel {
         ps.setString(5,txtPassword.getText());
         ps.execute();
         edShowData();
-        autoID();
+        edClear();
             MainForm.type.autoID(sql, lblid);
     }catch(NumberFormatException | SQLException e){JOptionPane.showMessageDialog(this,e);}
     }
@@ -417,6 +508,7 @@ public class CreateAccount extends javax.swing.JPanel {
              btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png")));
              btnDelete.setEnabled(false);
              btnCancel.setEnabled(false);
+             edClear();
              MainForm.type.autoID(sql, lblid);
             //JOptionPane.showMessageDialog(this,"deleted");
         }catch(HeadlessException | NumberFormatException | SQLException e){JOptionPane.showMessageDialog(this,e);}
@@ -437,6 +529,8 @@ public class CreateAccount extends javax.swing.JPanel {
             
         btnDelete.setEnabled(false);
         btnCancel.setEnabled(false);
+        edClear();
+        MainForm.type.autoID(sql, lblid);
         con.close();
         
     }catch(NumberFormatException | SQLException e){}
@@ -494,5 +588,13 @@ public class CreateAccount extends javax.swing.JPanel {
                }
            }
        }catch(SQLException e){JOptionPane.showMessageDialog(this,e+"Create account");}
+    }
+    private void edClear(){
+       lblid.setText(null);
+       //cbostaff_id.setSelectedItem(null);
+       lblstaff_naemm.setText(null);
+       txtEmail.setText(null);
+       txtPassword.setText(null);
+       txtRepass.setText(null);
     }
 }

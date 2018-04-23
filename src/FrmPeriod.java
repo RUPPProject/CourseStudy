@@ -17,6 +17,7 @@ public class FrmPeriod extends javax.swing.JPanel {
         }catch(Exception e){}
         edShowData();
         btnCancel.setEnabled(false);
+        btnDelete.setEnabled(false);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -334,7 +335,11 @@ public class FrmPeriod extends javax.swing.JPanel {
     }//GEN-LAST:event_tbPeroidMouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        edDelete();
+        int ask=JOptionPane.showConfirmDialog(null,"Do you want to delete?","Delete Data",JOptionPane.YES_NO_OPTION);
+        if(ask==JOptionPane.YES_OPTION){
+            edDelete();
+        }
+        else{}
         
     }//GEN-LAST:event_btnDeleteActionPerformed
 

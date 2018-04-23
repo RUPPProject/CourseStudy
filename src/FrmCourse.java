@@ -323,9 +323,12 @@ public class FrmCourse extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-         edDelete();
-         btnCancel.setEnabled(false);
-        
+        int ask=JOptionPane.showConfirmDialog(null,"Do you want to delete data?","Delete Data",JOptionPane.YES_NO_OPTION);
+        if(ask==JOptionPane.YES_OPTION){
+            edDelete();
+            btnCancel.setEnabled(false);
+        }
+        else{}
     }//GEN-LAST:event_btnDeleteActionPerformed
     static String time;
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed

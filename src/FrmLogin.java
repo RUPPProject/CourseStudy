@@ -76,6 +76,12 @@ public class FrmLogin extends javax.swing.JPanel {
         jLabel13.setText("Staff Name");
         jPanel2.add(jLabel13);
         jLabel13.setBounds(10, 60, 140, 31);
+
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyReleased(evt);
+            }
+        });
         jPanel2.add(txtPassword);
         txtPassword.setBounds(160, 110, 200, 30);
 
@@ -92,7 +98,7 @@ public class FrmLogin extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Schedule");
+        jLabel1.setText("LOGIN");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         add(jLabel1);
         jLabel1.setBounds(60, 10, 290, 40);
@@ -184,7 +190,8 @@ public class FrmLogin extends javax.swing.JPanel {
     }//GEN-LAST:event_txtIDFocusLost
 
     private void txtIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyReleased
-         lblShowID1.setText("");
+         DalinType.enterTextPassword(txtPassword, evt);
+        lblShowID1.setText("");
     }//GEN-LAST:event_txtIDKeyReleased
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -194,6 +201,10 @@ public class FrmLogin extends javax.swing.JPanel {
             }
             else{}
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
+        DalinType.enterJButton(btnLogin, evt);
+    }//GEN-LAST:event_txtPasswordKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -90,6 +90,11 @@ public class FrmRegister extends javax.swing.JPanel {
         jLabel8.setBounds(12, 13, 150, 31);
 
         cbostudent_id.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        cbostudent_id.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cbostudent_idFocusLost(evt);
+            }
+        });
         jPanel2.add(cbostudent_id);
         cbostudent_id.setBounds(160, 60, 260, 30);
 
@@ -184,9 +189,9 @@ public class FrmRegister extends javax.swing.JPanel {
         jScrollPane1.setBounds(20, 50, 596, 180);
 
         jLabel14.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel14.setText("Schedule");
+        jLabel14.setText("Search St_ID");
         jPanel3.add(jLabel14);
-        jLabel14.setBounds(10, 10, 90, 31);
+        jLabel14.setBounds(20, 10, 100, 31);
 
         txtSearch.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -235,7 +240,11 @@ public class FrmRegister extends javax.swing.JPanel {
     }//GEN-LAST:event_tbRegisterMouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-       edDelete();
+        int ask=JOptionPane.showConfirmDialog(null,"Do you want to delete?","Delete Data", JOptionPane.YES_NO_OPTION);
+        if(ask==JOptionPane.YES_OPTION){
+            edDelete();
+        }
+        else {}
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -269,6 +278,10 @@ public class FrmRegister extends javax.swing.JPanel {
                  else {edShowData();}
          }catch(NumberFormatException | SQLException e){JOptionPane.showMessageDialog(null,e);}
     }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void cbostudent_idFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbostudent_idFocusLost
+       
+    }//GEN-LAST:event_cbostudent_idFocusLost
     
     
 

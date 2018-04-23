@@ -417,9 +417,9 @@ public class FrmStaff extends javax.swing.JPanel {
         jScrollPane3.setBounds(10, 50, 1210, 241);
 
         jLabel12.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel12.setText("Search");
+        jLabel12.setText("Search by: ID , Name");
         jPanel4.add(jLabel12);
-        jLabel12.setBounds(10, 10, 90, 31);
+        jLabel12.setBounds(10, 10, 170, 31);
 
         txtSearch.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         txtSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -433,7 +433,7 @@ public class FrmStaff extends javax.swing.JPanel {
             }
         });
         jPanel4.add(txtSearch);
-        txtSearch.setBounds(130, 10, 257, 30);
+        txtSearch.setBounds(200, 10, 730, 30);
 
         add(jPanel4);
         jPanel4.setBounds(10, 380, 1230, 300);
@@ -611,10 +611,14 @@ public class FrmStaff extends javax.swing.JPanel {
     }//GEN-LAST:event_tbStaffMouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-         edDelete();
+      int ask=JOptionPane.showConfirmDialog(null,"Do you want to delete data?", "Delete Data", JOptionPane.YES_NO_OPTION);
+       if(ask==JOptionPane.YES_OPTION){
+        edDelete();
          btnSave.setText("Save");
          btnDelete.setEnabled(false);
          txtID.setEnabled(true);
+       }
+       else{}
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void txtIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyTyped

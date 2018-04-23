@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -68,6 +69,11 @@ public class DalinType {
            b.requestFocus();
        }
    }
+    public static void enterTextPassword( JPasswordField txt, KeyEvent evt){
+      if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+          txt.requestFocus();
+      }   
+    }
   
     Connection con;
     ResultSet rst;

@@ -1,3 +1,8 @@
+
+import java.awt.Color;
+import java.sql.Connection;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,8 +18,35 @@ public class ReportMenue extends javax.swing.JPanel {
     /**
      * Creates new form ReportMenue
      */
+  public static JPanel cur;
+  public static JButton btncur;
+   Null null1=new Null();
+  
+   ShowCourseReport r1=new ShowCourseReport();
+   ShowReportStudent studentR=new ShowReportStudent();
+   showInstructorReport instructorReport=new showInstructorReport();
+   static ReportMenue reportM;
     public ReportMenue() {
         initComponents();
+        setSize(1558, 623);
+        setLocation(200,100);
+        try{
+            con=DalinConnectSql.getDalinConnection();
+        }catch(Exception e){}
+       
+        btncur=btnCourstM;
+         cur=null1;
+         add(null1).setVisible(false);
+        btnCourstM.setForeground(Color.red);
+        btnInstructorR.setForeground(Color.red);
+        btnReportStudent.setForeground(Color.red);
+       //.setVisible(true);
+        add(r1).setVisible(false);
+        add(studentR);
+        studentR.setVisible(false);
+        add(instructorReport);
+        instructorReport.setVisible(false);
+        
     }
 
     /**
@@ -26,33 +58,71 @@ public class ReportMenue extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnInstructorR = new javax.swing.JButton();
+        btnCourstM = new javax.swing.JButton();
+        btnReportStudent = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setLayout(null);
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton1.setText("Professor scheduled");
-        add(jButton1);
-        jButton1.setBounds(320, 0, 160, 40);
+        btnInstructorR.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        btnInstructorR.setText("Professor scheduled");
+        btnInstructorR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInstructorRActionPerformed(evt);
+            }
+        });
+        add(btnInstructorR);
+        btnInstructorR.setBounds(640, 0, 160, 40);
 
-        jButton2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton2.setText("Course Semester");
-        add(jButton2);
-        jButton2.setBounds(0, 0, 140, 40);
+        btnCourstM.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        btnCourstM.setText("Course Semester");
+        btnCourstM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCourstMActionPerformed(evt);
+            }
+        });
+        add(btnCourstM);
+        btnCourstM.setBounds(300, 0, 140, 40);
 
-        jButton3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton3.setText("Professor scheduled");
-        add(jButton3);
-        jButton3.setBounds(150, 0, 160, 40);
+        btnReportStudent.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        btnReportStudent.setText("Report Student");
+        btnReportStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportStudentActionPerformed(evt);
+            }
+        });
+        add(btnReportStudent);
+        btnReportStudent.setBounds(460, 0, 160, 40);
     }// </editor-fold>//GEN-END:initComponents
+    Connection con;
+    //JasperViewer j=new JasperViewer
+    private void btnCourstMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCourstMActionPerformed
+
+   
+        swapReport(r1,btnCourstM);
+    }//GEN-LAST:event_btnCourstMActionPerformed
+
+    private void btnReportStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportStudentActionPerformed
+        swapReport(studentR, btnReportStudent);
+    }//GEN-LAST:event_btnReportStudentActionPerformed
+
+    private void btnInstructorRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInstructorRActionPerformed
+        swapReport(instructorReport, btnInstructorR);
+    }//GEN-LAST:event_btnInstructorRActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnCourstM;
+    private javax.swing.JButton btnInstructorR;
+    private javax.swing.JButton btnReportStudent;
     // End of variables declaration//GEN-END:variables
+    public void swapReport(JPanel p,JButton btn){
+        btncur.setForeground(Color.red);
+        btncur=btn;
+        btncur.setForeground(Color.blue);
+//        
+        cur.setVisible(false);
+        cur=p;
+        cur.setVisible(true);
+    }
 }

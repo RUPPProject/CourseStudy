@@ -7,15 +7,7 @@ import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
-
 public class MainForm extends javax.swing.JFrame {
     public static JLabel userlogin; 
     public static JButton infor;
@@ -38,7 +30,9 @@ public class MainForm extends javax.swing.JFrame {
    static FrmSchedule schedule=new FrmSchedule();
     JButton btnR;
     static FrmLogin login;
-    
+   static ReportMenue r=new ReportMenue();
+    //ShowReportStudent showReportStudent=new ShowReportStudent();
+    //ShowCourseReport showCourseReport=new ShowCourseReport();
     public MainForm() {
         initComponents();
         try{
@@ -46,13 +40,13 @@ public class MainForm extends javax.swing.JFrame {
         }catch(Exception e){}
         date=lblDate;
         login =new FrmLogin();
-        btnR = btnRegister;
+        curbtn= btnRegister;
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         setDate(lblDate);
         setTime(lblTime);
         cur=login;
-        curbtn=btnRegister;
+        //curbtn=btnRegister;
         btnRegister.setForeground(Color.white);
         
         add(login);
@@ -69,12 +63,17 @@ public class MainForm extends javax.swing.JFrame {
         add(schedule).setVisible(false);
         add(period).setVisible(false);
         add(register);
-         register.setVisible(false);
+        register.setVisible(false);
         add(account);account.setVisible(false);
+        add(r);r.setVisible(false);
+        ReportMenue.reportM=new ReportMenue();
+        //ReportMenue.reportM.setVisible(false);
+        //r.add(ReportMenue.r1);
         setEnableJButton(false);
         userlogin=lblUser;
         infor=btnInfromation;
-        
+        // btnReport.setEnabled(false);
+        LoadingFrom.load.dispose();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -444,6 +443,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void btnCouresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCouresActionPerformed
         swapFrm(course,btnCoures);
+        //btnReport.setEnabled(true);
     }//GEN-LAST:event_btnCouresActionPerformed
 
     private void btnPeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPeriodActionPerformed
@@ -459,7 +459,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAssignmentActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-                LoadingFrom.load.dispose();
+                 //LoadingFrom.load.dispose();
     }//GEN-LAST:event_formWindowOpened
 
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
@@ -477,21 +477,18 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInfromationActionPerformed
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
-
-    if(curbtn.equals(btnAssignment)){
-        JOptionPane.showMessageDialog(null,"btnAssingment");
-    }
-    else if(curbtn.equals(btnInfromation)){
-        JOptionPane.showMessageDialog(null,"btnIfrom");
-    }
-    else if(curbtn.equals(btnCoures)){
-                try{
-            String report="C:\\Users\\Ean Dalin\\Documents\\NetBeansProjects\\CourseStudy\\src\\report\\Testreport.jrxml";
-            JasperReport rp=JasperCompileManager.compileReport(report);
-            JasperPrint print=JasperFillManager.fillReport(rp,null,con);
-            JasperViewer.viewReport(print);
-        }catch(JRException e){JOptionPane.showMessageDialog(this,e);}
-    }
+//        
+//    if(curbtn.equals(btnAssignment)){
+//        JOptionPane.showMessageDialog(null,"btnAssingment");
+//    }
+//    else if(curbtn.equals(btnInfromation)){
+//        JOptionPane.showMessageDialog(null,"btnIfrom");
+//    }
+//    else if(curbtn.equals(btnCoures)){
+//               
+//    }
+//        btnReport.setEnabled(false);
+        swapFrm(r, btnReport);
     }//GEN-LAST:event_btnReportActionPerformed
 
 //    /**
@@ -595,6 +592,7 @@ public class MainForm extends javax.swing.JFrame {
         curbtn.setForeground(Color.white);
         curbtn=btn;
         curbtn.setForeground(Color.red);
+        
         cur.setVisible(false);
         cur=panel;
         cur.setVisible(true);
@@ -615,6 +613,7 @@ public class MainForm extends javax.swing.JFrame {
         btnCreateAccount.setEnabled(en);
         btnSignin.setEnabled(en);
         btnReport.setEnabled(en);
+       
    }
    public void setEnableJButtonReceptionish(boolean en){
         btnRegister.setEnabled(en);        

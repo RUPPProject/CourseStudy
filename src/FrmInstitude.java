@@ -13,7 +13,6 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.ComboBoxEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -657,11 +656,14 @@ public class FrmInstitude extends javax.swing.JPanel {
     }//GEN-LAST:event_tbInstuctorMouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+       int ask=JOptionPane.showConfirmDialog(null,"Do you want delete data?","Delete Data", JOptionPane.YES_NO_OPTION);
+       if(ask==JOptionPane.YES_OPTION){        
         edDelete();
         txtID.setEnabled(true);
         btnSave.setText("Save");
         btnDelete.setEnabled(false);
-       
+       }
+       else{}
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void txtIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyTyped
@@ -926,6 +928,8 @@ public class FrmInstitude extends javax.swing.JPanel {
                  }
                         
             ps.execute();
+            n="";
+            i=1;
             MainForm.schedule.edScInstructorID();
             MainForm.assigment.edScInSTID();
             edShowData();
@@ -976,7 +980,9 @@ public class FrmInstitude extends javax.swing.JPanel {
              btnDelete.setEnabled(false);
              btnCancel.setEnabled(false);
              txtID.setEnabled(true);
-        } catch (FileNotFoundException | NumberFormatException | SQLException ex) {
+             n="";
+             i=1;
+         } catch (FileNotFoundException | NumberFormatException | SQLException ex) {
             JOptionPane.showMessageDialog(this,ex);
         }
     }

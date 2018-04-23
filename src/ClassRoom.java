@@ -290,7 +290,7 @@ public class ClassRoom extends javax.swing.JPanel {
         jScrollPane1.setBounds(20, 50, 596, 180);
 
         jLabel14.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel14.setText("Schedule");
+        jLabel14.setText("Search");
         jPanel1.add(jLabel14);
         jLabel14.setBounds(20, 10, 90, 31);
 
@@ -367,7 +367,11 @@ public class ClassRoom extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        edDelete();
+        int ask=JOptionPane.showConfirmDialog(null,"Do you want to delete data?","Delete Data",JOptionPane.YES_NO_OPTION);
+        if(ask==JOptionPane.YES_OPTION){
+            edDelete();
+        }
+        else{}
         
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -458,7 +462,12 @@ public class ClassRoom extends javax.swing.JPanel {
                         });
                     }while(rst.next());
                 }
-                else {edShowData();}
+                
+                else {
+                   
+                    edShowData();
+                    
+                }
         }catch(SQLException e){}
     }//GEN-LAST:event_txtSearchKeyReleased
 

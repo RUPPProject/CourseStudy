@@ -44,7 +44,7 @@ public class FrmSchedule extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tb = new javax.swing.JTable();
         jLabel14 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         setLayout(null);
@@ -94,7 +94,7 @@ public class FrmSchedule extends javax.swing.JPanel {
         jPanel2.add(jLabel12);
         jLabel12.setBounds(10, 130, 140, 31);
 
-        txtclassname.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtclassname.setFont(new java.awt.Font("Khmer Serif", 0, 18)); // NOI18N
         jPanel2.add(txtclassname);
         txtclassname.setBounds(160, 130, 260, 30);
 
@@ -109,7 +109,7 @@ public class FrmSchedule extends javax.swing.JPanel {
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-trash-25.png"))); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
@@ -122,7 +122,7 @@ public class FrmSchedule extends javax.swing.JPanel {
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png"))); // NOI18N
         btnSave.setText("Save");
         btnSave.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnSave.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnSave.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -151,6 +151,7 @@ public class FrmSchedule extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(null);
 
+        tb.setFont(new java.awt.Font("Khmer Serif", 0, 11)); // NOI18N
         tb.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -184,13 +185,18 @@ public class FrmSchedule extends javax.swing.JPanel {
         jScrollPane1.setBounds(20, 50, 596, 180);
 
         jLabel14.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel14.setText("Schedule");
+        jLabel14.setText("Search there");
         jPanel1.add(jLabel14);
-        jLabel14.setBounds(10, 10, 90, 31);
+        jLabel14.setBounds(20, 10, 90, 31);
 
-        jTextField10.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jPanel1.add(jTextField10);
-        jTextField10.setBounds(130, 10, 257, 30);
+        txtSearch.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+        jPanel1.add(txtSearch);
+        txtSearch.setBounds(130, 10, 257, 30);
 
         add(jPanel1);
         jPanel1.setBounds(0, 240, 630, 240);
@@ -220,7 +226,12 @@ public class FrmSchedule extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-         edDelete();
+        int ask=JOptionPane.showConfirmDialog(null,"Do you want to delete data?","Delete Data",JOptionPane.YES_NO_OPTION);
+        if(ask==JOptionPane.YES_OPTION){     
+
+        edDelete();
+        }
+        else{}
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void tbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMouseClicked
@@ -250,6 +261,30 @@ public class FrmSchedule extends javax.swing.JPanel {
         }catch(Exception e){JOptionPane.showMessageDialog(this,e);}
     }//GEN-LAST:event_cboInstructorIDFocusLost
 
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+       try{
+           while(mode.getRowCount()>0)
+               mode.removeRow(0);
+               mode=(DefaultTableModel)tb.getModel();
+               String sql="select * from sc where instructor_id=?";
+               ps=con.prepareCall(sql);
+               ps.setInt(1,Integer.parseInt(txtSearch.getText()));
+               rst=ps.executeQuery();
+               if(rst.first()){
+                   do{
+                        mode.addRow(new String[]{
+                        rst.getString(1),
+                        rst.getString(2),
+                        rst.getString(3),
+                        rst.getString(4)
+                        });
+                   }while(rst.next());
+               }
+               else 
+                   edShowData();
+       }catch(Exception e){}
+    }//GEN-LAST:event_txtSearchKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
@@ -267,9 +302,9 @@ public class FrmSchedule extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField10;
     private javax.swing.JLabel lblno;
     private javax.swing.JTable tb;
+    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtclassname;
     // End of variables declaration//GEN-END:variables
     PreparedStatement ps;
@@ -324,7 +359,7 @@ public class FrmSchedule extends javax.swing.JPanel {
             edShowData();
             MainForm.type.autoID(sql, lblno);
             btnDelete.setEnabled(false);
- 
+            btnCancel.setEnabled(false);
         }catch(NumberFormatException | SQLException e){JOptionPane.showMessageDialog(this,e);}
     }
     private void edDelete(){

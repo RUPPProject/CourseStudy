@@ -1,5 +1,6 @@
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -51,17 +52,48 @@ public class FrmInformation extends javax.swing.JPanel {
         jScrollPane1.setBounds(20, 50, 596, 215);
 
         jLabel14.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel14.setText("Schedule");
+        jLabel14.setText("Search");
         jPanel1.add(jLabel14);
         jLabel14.setBounds(10, 10, 90, 31);
 
         txtSearch.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
         jPanel1.add(txtSearch);
         txtSearch.setBounds(130, 10, 257, 30);
 
         add(jPanel1);
         jPanel1.setBounds(10, 10, 630, 280);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        try{
+            while(mode.getRowCount()>0)
+                mode.removeRow(0);
+                mode=(DefaultTableModel)tbCourse.getModel();
+                String sql="select * from course where id=? or name=?";
+                ps=con.prepareCall(sql);
+                ps.setInt(1,Integer.parseInt(txtSearch.getText()));
+                ps.setString(2, txtSearch.getText());
+                rst=ps.executeQuery();
+                if(rst.first())
+                    do{
+                    mode.addRow(new String[]{
+                        rst.getString(1),
+                         rst.getString(2),
+                          rst.getString(3),
+                           rst.getString(4),
+                            rst.getString(5),
+                             rst.getString(6)
+                    });
+                    }while(rst.next());
+                else 
+                    edShowData();
+        }catch(Exception e){}
+    }//GEN-LAST:event_txtSearchKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -75,6 +107,7 @@ public class FrmInformation extends javax.swing.JPanel {
     ResultSet rst;
     DefaultTableModel mode=new DefaultTableModel();
     Connection con;
+    PreparedStatement ps;
     public void edShowData(){
         try{
             con=DalinConnectSql.getDalinConnection();

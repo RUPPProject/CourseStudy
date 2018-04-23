@@ -42,7 +42,7 @@ public class FrmCalssDetail extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbClassDetail = new javax.swing.JTable();
         jLabel14 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
 
         setLayout(null);
 
@@ -165,26 +165,31 @@ public class FrmCalssDetail extends javax.swing.JPanel {
         jScrollPane1.setBounds(20, 50, 596, 180);
 
         jLabel14.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel14.setText("Schedule");
+        jLabel14.setText("Search there");
         jPanel1.add(jLabel14);
         jLabel14.setBounds(10, 10, 90, 31);
 
-        jTextField10.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        txtSearch.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
+                txtSearchActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField10);
-        jTextField10.setBounds(130, 10, 257, 30);
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+        jPanel1.add(txtSearch);
+        txtSearch.setBounds(130, 10, 257, 30);
 
         add(jPanel1);
         jPanel1.setBounds(30, 250, 630, 240);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_txtSearchActionPerformed
 
     private void cboClassIDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboClassIDFocusLost
         edGetNameClass();
@@ -218,11 +223,39 @@ public class FrmCalssDetail extends javax.swing.JPanel {
     }//GEN-LAST:event_tbClassDetailMouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        edDelete();
-        btnNew.setText("Save");
-        btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png")));
-        btnDelete.setEnabled(false);
+        int ask=JOptionPane.showConfirmDialog(null,"Do you want to delete data?","Delete Data",JOptionPane.YES_NO_OPTION);
+        if(ask==JOptionPane.YES_OPTION){
+            edDelete();
+            btnNew.setText("Save");
+            btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-save-22.png")));
+            btnDelete.setEnabled(false);
+        }
+        else{}
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+       try{
+           while(mode.getRowCount()>0)
+               mode.removeRow(0);
+               mode=(DefaultTableModel)tbClassDetail.getModel();
+               String sql="select * from roomdetail where name_class=? or student_name=? ";
+               ps=con.prepareCall(sql);
+               ps.setString(1,txtSearch.getText());
+               ps.setString(2,txtSearch.getText());
+               rst=ps.executeQuery();
+               if(rst.first()){
+                   do{
+                       mode.addRow(new String[]{
+                        rst.getString(1),
+                        rst.getString(2),
+                        rst.getString(3)
+                       });
+                   }while(rst.next());
+               }
+               else
+                   edShowData();
+       }catch(Exception e){}
+    }//GEN-LAST:event_txtSearchKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -239,9 +272,9 @@ public class FrmCalssDetail extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField10;
     private javax.swing.JLabel lblNo;
     private javax.swing.JTable tbClassDetail;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
     PreparedStatement ps;
     Connection con;
@@ -282,7 +315,7 @@ public class FrmCalssDetail extends javax.swing.JPanel {
             while(rst.next()){
                 name=rst.getString("Name");
             }
-            //JOptionPane.showMessageDialog(null,name);
+            JOptionPane.showMessageDialog(null,name);
         }catch(SQLException e){}
     }
     //get Name from tb student
@@ -306,7 +339,7 @@ public class FrmCalssDetail extends javax.swing.JPanel {
             ps.setString(3,nameStu);
             ps.execute();
             edShowData();
-           MainForm.ref.type.autoID(sql, lblNo);
+            MainForm.type.autoID(sql, lblNo);
         }catch(NumberFormatException | SQLException e){JOptionPane.showMessageDialog(this,e);}
     }
      private void edUdpate() {

@@ -13,7 +13,6 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 
-
 public class ShowCourseReport extends javax.swing.JPanel {
     Connection con;
     PreparedStatement ps;
